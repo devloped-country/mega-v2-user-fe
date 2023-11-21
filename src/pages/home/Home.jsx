@@ -47,12 +47,12 @@ export default function Home() {
     return <div>Loading...</div>;
   }
 
-  const mapedPosts = posts.map((v) => (
-    <div key={v.id}>
-      <h2 className={styles.greeting}>{v.title}</h2>
-      <p>{v.body}</p>
-    </div>
-  ));
+  // const mapedPosts = posts.map((v) => (
+  //   <div key={v.id}>
+  //     <h2 className={styles.greeting}>{v.title}</h2>
+  //     <p>{v.body}</p>
+  //   </div>
+  // ));
 
   return (
     <div>
