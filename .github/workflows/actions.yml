@@ -7,37 +7,35 @@ on:
     - cron: '0 0 * * *'
 
 jobs:
-  runs-on: ubuntu-latest
-  strategy:
-    matrix:
-      node-version: [18.x]
-  steps:
-    - name: Git Setup
-      uses: actions/checkout@v3
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git Setup
+        uses: actions/checkout@v3
 
-    - name: NodeJS Setup
-      uses: actions/setup-node@v3
-      with:
-        node-version: 20.9.0
-        cache: npm
+      - name: NodeJS Setup
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.9.0
+          cache: npm
 
-    - name: Package Install
-      run: npm ci
+      - name: Package Install
+        run: npm ci
 
-    - name: Proejct Build
-      run: npm run build
+      - name: Proejct Build
+        run: npm run build
 
-    # GitHub Actions CLI 환경에서 S3 사용자 권한의 aws 접속
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
+      # GitHub Actions CLI 환경에서 S3 사용자 권한의 aws 접속
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
 
-    # react 빌드한 /build를 s3로 업로드
-    - name: Upload /build to S3
-      env:
-        BUCKET_NAME: ${{ secrets.AWS_BUCKET_NAME }}
-      run: |
-        aws s3 cp --recursive --region ap-northeast-2 dist s3://mega-v2-admin-s3-d07
+      # react 빌드한 /build를 s3로 업로드
+      - name: Upload /build to S3
+        run: aws s3 cp --recursive --region ap-northeast-2 dist s3://mega-v2-user-s3-d07
+
+      - name: Cloudfront invalidate
+        run: aws cloudfront create-invalidation --distribution-id EQYB4G4GE7WE --paths '/*'
