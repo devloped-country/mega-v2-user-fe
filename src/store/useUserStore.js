@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { create } from 'zustand';
 
 const initialState = {
@@ -14,7 +15,7 @@ const useUsersStore = create((set) => ({
   fetchUsers: async () => {
     set((state) => ({ ...state, loading: true }));
     try {
-      const res = await fetch('https://jsonplaceholder.typicode.com/users');
+      const res = await axios('https://jsonplaceholder.typicode.com/users');
       const users = await res.json();
       set((state) => ({ ...state, error: '', users }));
     } catch (error) {

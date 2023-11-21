@@ -5,7 +5,7 @@ const initOptions = {
   onError: (error) => {},
 };
 
-export default function useFetch(keys, fetcher, options) {
+export function useFetch(keys, fetcher, options) {
   const [state, setState] = useState({
     data: null,
     isError: false,
@@ -14,7 +14,6 @@ export default function useFetch(keys, fetcher, options) {
     isSuccess: false,
   });
   const [refetcher, setRefetcher] = useState();
-
   const newOptions = { ...initOptions, ...options };
   const { onSuccess, onError } = newOptions;
 
