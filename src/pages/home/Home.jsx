@@ -72,6 +72,7 @@ export default function Home() {
         버튼2
       </button>
       {/* {mapedPosts} */}
+      하이요
     </div>
   );
 }
