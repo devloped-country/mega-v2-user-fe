@@ -4,7 +4,7 @@ on:
   pull_request:
     branches: [main]
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '0 15 * * *'
 
 jobs:
   build:
@@ -35,7 +35,7 @@ jobs:
 
       # react 빌드한 /build를 s3로 업로드
       - name: Upload /build to S3
-        run: aws s3 cp --recursive --region ap-northeast-2 dist s3://mega-v2-user-s3-d07
+        run: aws s3 cp --recursive --region ${{ secrets.AWS_DEFAULT_REGION }} dist ${{ secrets.AWS_BUCKET_NAME }}}
 
       - name: Cloudfront invalidate
-        run: aws cloudfront create-invalidation --distribution-id EQYB4G4GE7WE --paths '/*'
+        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_CLOUDFRONT_ID }} --paths '/*'
