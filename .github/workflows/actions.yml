@@ -35,7 +35,7 @@ jobs:
 
       # react 빌드한 /build를 s3로 업로드
       - name: Upload /build to S3
-        run: aws s3 cp --recursive --region ${{ secrets.AWS_DEFAULT_REGION }} dist ${{ secrets.AWS_BUCKET_NAME }}}
+        run: aws s3 cp --recursive --region ${{ secrets.AWS_DEFAULT_REGION }} dist ${{ secrets.AWS_BUCKET_NAME }}
 
       - name: Cloudfront invalidate
         run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_CLOUDFRONT_ID }} --paths '/*'
