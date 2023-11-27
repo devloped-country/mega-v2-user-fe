@@ -1,0 +1,85 @@
+.wrapper {
+  padding: 59px;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.slogan {
+  font-size: 2.4rem;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-black);
+}
+
+.subSlogan {
+  margin-top: 12px;
+  font-size: 1.2rem;
+  color: var(--color-gray-300);
+}
+
+.form {
+  margin-top: 24px;
+  width: 100%;
+  position: relative;
+}
+
+.inputWrapper {
+  width: 100%;
+  padding: 6px 10px;
+  border-radius: 5px;
+  border: 1px solid var(--color-black);
+}
+
+.inputWrapper + .inputWrapper {
+  margin-top: 8px;
+}
+
+.inputTitle {
+  font-size: 0.8rem;
+}
+
+.inputTitleActive {
+  border: 1px solid var(--color-green-200);
+}
+
+.input {
+  margin-top: 4px;
+  width: 100%;
+  border: none;
+  outline: none;
+}
+
+.login {
+  margin-top: 24px;
+  font-size: 1.4rem;
+  color: var(--color-white);
+  outline: none;
+  background-color: var(--color-black);
+  padding: 12px;
+  width: 100%;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.validateMessage {
+  font-size: 1rem;
+  position: absolute;
+  left: 0;
+  bottom: 54px;
+  color: var(--color-red-100);
+}
+
+.password {
+  margin-top: 16px;
+  font-size: 1rem;
+  color: var(--color-gray-300);
+}
