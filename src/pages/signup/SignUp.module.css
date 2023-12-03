@@ -1,0 +1,90 @@
+.wrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 32px;
+}
+
+.title {
+  font-weight: var(--font-weight-semibold);
+  font-size: 2.2rem;
+  margin-bottom: 24px;
+}
+
+.input {
+  margin-top: 16px;
+  outline: none;
+  border: none;
+  background-color: var(--color-gray-400);
+  padding: 16px 24px;
+  width: 100%;
+  font-size: 1.6rem;
+  border-radius: 10px;
+}
+
+.input::-webkit-input-placeholder {
+  color: var(--color-gray-300);
+}
+
+.button {
+  margin-top: 24px;
+  width: 100%;
+  padding: 16px 24px;
+  color: var(--color-white);
+  border: none;
+  outline: none;
+  background-color: var(--color-black);
+  border-radius: 10px;
+  font-size: 1.6rem;
+}
+
+.radio {
+  width: 18px;
+  height: 18px;
+}
+
+.label {
+  font-size: 1.4rem;
+}
+
+.inputWrapperContainer {
+  margin-top: 24px;
+  display: flex;
+  gap: 12px;
+}
+
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.authWrapper {
+  width: 100%;
+  margin-top: 16px;
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+}
+
+.authInput {
+  outline: none;
+  border: none;
+  background-color: var(--color-gray-400);
+  padding: 16px 24px;
+  /* width: 100%; */
+  font-size: 1.6rem;
+  border-radius: 10px;
+}
+
+.auth {
+  flex-grow: 1;
+  background-color: var(--color-black);
+  font-size: 1.6rem;
+  color: var(--color-white);
+  border-radius: 10px;
+  border: none;
+}
