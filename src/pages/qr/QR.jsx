@@ -3,13 +3,13 @@ import styles from './QR.module.css';
 function QR() {
   return (
     <section className={styles.wrapper}>
-      <div>asdsds</div>
-      <div>asdsds</div>
-      <div>asdsds</div>
-      <div>asdsds</div>
-      <div>asdsds</div>
-      <div>asdsds</div>
-      <div>asdsds</div>
+      <div className={styles.header} />
+      <div className={styles.left} />
+      <div className={styles.main} />
+      <div className={styles.right} />
+      <div className={styles.footer}>
+        <strong className={styles.strong}>QR 코드를 인식해주세요.</strong>
+      </div>
     </section>
   );
 }

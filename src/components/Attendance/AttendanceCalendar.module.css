@@ -1,0 +1,26 @@
+.month {
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+.days {
+  display: flex;
+  margin-top: 24px;
+}
+
+.day {
+  width: calc(100% / 7);
+  text-align: center;
+  padding: 16px;
+}
+
+.dates {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.date {
+  width: calc(100% / 7);
+  padding: 16px;
+  text-align: center;
+}
