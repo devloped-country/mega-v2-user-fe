@@ -1,0 +1,50 @@
+.noteItem {
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-top: 1px solid var(--color-gray-600);
+}
+
+.noteItem:last-child {
+  border-bottom: 1px solid var(--color-gray-600);
+}
+
+.button {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--color-black);
+  opacity: 0.5;
+}
+
+.receiverList {
+  padding: 24px 0;
+  border-radius: 10px 10px 0 0;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background-color: var(--color-white);
+  z-index: 99999;
+  width: 100%;
+}
+
+.receiverItem {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 24px;
+}
+
+.profile {
+  width: 32px;
+  border-radius: 100px;
+}

@@ -1,0 +1,35 @@
+.wrapper {
+  padding: 16px 0;
+  background-color: var(--color-gray-600);
+}
+
+.title {
+  padding: 16px 24px;
+  background-color: var(--color-white);
+  font-size: 1.8rem;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--color-gray-200);
+}
+
+.editor {
+  padding: 24px;
+  background-color: var(--color-white);
+}
+
+.textarea {
+  width: 100%;
+  outline: none;
+  resize: none;
+  border: 1px solid var(--color-gray-200);
+  border-radius: 10px;
+  height: 80px;
+  font-size: 1.6rem;
+  padding: 14px;
+}
+
+.footer {
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+}

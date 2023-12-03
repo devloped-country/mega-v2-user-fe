@@ -1,0 +1,38 @@
+.wrapper {
+  padding: 24px;
+}
+
+.receiver {
+  font-size: 1.6rem;
+}
+
+.title {
+  margin-top: 16px;
+  font-size: 1.6rem;
+}
+
+.content {
+  margin-top: 16px;
+  font-size: 1.6rem;
+}
+
+.input,
+.textarea {
+  margin-top: 16px;
+  border-radius: 10px;
+  border: 1px solid var(--color-gray-200);
+  padding: 8px 16px;
+  width: 100%;
+  outline: none;
+}
+
+.textarea {
+  resize: none;
+  height: 200px;
+}
+
+.footer {
+  margin: 24px;
+  display: flex;
+  justify-content: center;
+}
