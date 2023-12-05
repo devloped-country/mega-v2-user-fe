@@ -3,6 +3,7 @@ import Header from "../../components/Home/Header";
 import Detail from "../../components/Home/Detail";
 import NoticePreview from "../../components/Home/NoticePreview";
 import CurriculumPreview from "../../components/Home/CurriculumPreview";
+import AddBanner from "../../components/common/AddBanner";
 
 function Home() {
   const navigate = useNavigate();
@@ -29,6 +30,8 @@ function Home() {
       onButtonAction={handleNotice}
     />
     <NoticePreview/>
+
+    <AddBanner/>
 
     <Detail
       title='커리큘럼'

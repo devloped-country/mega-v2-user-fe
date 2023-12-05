@@ -1,0 +1,26 @@
+.wrapper {
+  display: flex;
+  flex-direction: row;
+
+  width: 350px;
+  border-radius: 10px;
+  margin: 15px auto 0;
+  padding: 20px;
+  background-color: var(--color-gray-400);
+  justify-content: space-around;
+}
+
+.textAlign {
+  display: flex;
+  flex-direction: column;
+}
+
+.topText {
+  font-size: 1.5rem;
+}
+
+.underText {
+  color: var(--color-gray-300);
+  font-size: 1rem;
+  margin-top: 5px;
+}
