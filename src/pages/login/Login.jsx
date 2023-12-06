@@ -1,11 +1,36 @@
 import { useState } from 'react';
 import styles from './Login.module.css';
+import { useMutation } from '@/hooks/useMutation';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const [isFocusEmailInput, setIsFocusEmailInput] = useState(false);
   const [isFocusPasswordInput, setIsFocusPasswordInput] = useState(false);
   const [isShowingValidateMessage, setIsShowingValidateMessage] =
     useState(true);
+  const [authInfo, setAuthInfo] = useState({
+    email: '',
+    password: '',
+  });
+  const navigate = useNavigate();
+
+  const { mutate } = useMutation(
+    async (param) =>
+      await axios({ url: '/api/auth/login', method: 'post', data: param }),
+    {
+      onSuccess: () => {
+        navigate('/', { state: { email: authInfo.email } });
+      },
+      onerror: () => {
+        setIsShowingValidateMessage(true);
+      },
+    }
+  );
+
+  const onClickLogin = () => {
+    mutate();
+  };
 
   return (
     <section className={styles.wrapper}>
@@ -24,6 +49,10 @@ function Login() {
             <input
               type='text'
               className={styles.input}
+              value={authInfo.email}
+              onChange={({ target }) =>
+                setAuthInfo((prev) => ({ ...prev, email: target }))
+              }
               onFocus={() => setIsFocusEmailInput(true)}
               onBlur={() => setIsFocusEmailInput(false)}
             />
@@ -37,6 +66,10 @@ function Login() {
             <input
               type='password'
               className={styles.input}
+              value={authInfo.password}
+              onChange={({ target }) =>
+                setAuthInfo((prev) => ({ ...prev, password: target }))
+              }
               onFocus={() => setIsFocusPasswordInput(true)}
               onBlur={() => setIsFocusPasswordInput(false)}
             />
