@@ -41,6 +41,16 @@
   font-size: 1.6rem;
 }
 
+.submit {
+  padding: 16px 24px;
+  color: var(--color-white);
+  border: none;
+  outline: none;
+  background-color: var(--color-black);
+  border-radius: 10px;
+  font-size: 1.6rem;
+}
+
 .radio {
   width: 18px;
   height: 18px;
@@ -51,9 +61,17 @@
 }
 
 .inputWrapperContainer {
+  width: 100%;
   margin-top: 24px;
   display: flex;
+  justify-content: space-between;
   gap: 12px;
+}
+
+.inputWrapperWrapper {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
 .inputWrapper {
