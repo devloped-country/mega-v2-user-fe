@@ -1,14 +1,17 @@
 import QrReader from 'react-qr-reader-es6';
 import styles from './QR.module.css';
 import { useSQS } from '@/hooks/useSQS';
+import { useSNS } from '@/hooks/useSNS';
 
 function QR() {
   const { mutater: sqsMutate } = useSQS();
+  const { subscribeQueue } = useSNS();
 
   const handleResult = (result) => {
     if (result) {
       const [_, qr] = result.split('/');
       sqsMutate(qr);
+      subscribeQueue().then((res) => console.log(res));
     }
   };
 
