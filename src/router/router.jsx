@@ -18,13 +18,15 @@ import Location from '@/pages/qr/Location';
 import Auth from '@/pages/qr/Auth';
 import SignUp from '@/pages/signup/SignUp';
 import Password from '@/pages/signup/Password';
+import Home from '../pages/home/Home';
+import Curriculum from '../pages/curriculum/Curriculum';
 import Success from '@/pages/qr/Success';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path='/' element={<Layout />}>
-        <Route index element={<div>asd</div>} />
+        <Route index element={<Home />} />
         <Route path='/qr' element={<QR />} />
         <Route path='/qr/success' element={<Success />} />
         <Route path='/qr/location' element={<Location />} />
@@ -37,6 +39,7 @@ export const router = createBrowserRouter(
         <Route path='/note' element={<Note />} />
         <Route path='/note/receive' element={<NoteReceive />} />
         <Route path='/note/editor' element={<NoteEditor />} />
+        <Route path='/curriculum' element={<Curriculum />} />
       </Route>
       <Route path='/login'>
         <Route index element={<Login />} />
