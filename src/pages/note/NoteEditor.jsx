@@ -1,6 +1,7 @@
 import { useLocation } from 'react-router-dom';
 import styles from './NoteEditor.module.css';
 import ModalButton from '@components/common/ModalButton';
+import { useSocket } from "@/hooks/useSocket";
 
 function NoteEditor() {
   const location = useLocation();
