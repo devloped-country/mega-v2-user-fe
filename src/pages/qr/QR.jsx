@@ -1,24 +1,53 @@
 import QrReader from 'react-qr-reader-es6';
 import styles from './QR.module.css';
 import { useSQS } from '@/hooks/useSQS';
-import { useSNS } from '@/hooks/useSNS';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useGeoLocation } from '@/hooks/useGeoLocation';
 
 function QR() {
   const { mutater: sqsMutate } = useSQS();
-  const { subscribeQueue } = useSNS();
+  const navigate = useNavigate();
+  const { location } = useGeoLocation();
 
-  const handleResult = (result) => {
+  const handleResult = async (result) => {
     if (result) {
       const [_, qr] = result.split('/');
-      sqsMutate(qr);
-      subscribeQueue().then((res) => console.log(res));
+      const { data } = await axios({
+        url: '/api/user',
+        method: 'post',
+        data: {
+          email: 'john2.doe@example.com',
+          latitude: location.latitude,
+          longitude: location.longitude,
+        },
+      });
+
+      if (data) {
+        navigate('/qr/location');
+        return;
+      }
+
+      const res = await axios(`/api/qr/${qr}`);
+      console.log(res);
+      if (res.data.responseCode === -1) {
+        navigate('/qr/auth');
+        return;
+      }
+
+      try {
+        await sqsMutate(qr, 'john2.doe@example.com');
+        navigate('/qr/success');
+      } catch (e) {
+        navigate('/qr/auth');
+      }
     }
   };
 
   return (
     <section className={styles.qrWrapper}>
       <QrReader
-        delay={1000}
+        delay={2000}
         onScan={handleResult}
         className={styles.qr}
         style={{ width: '100%', height: '100%' }}
