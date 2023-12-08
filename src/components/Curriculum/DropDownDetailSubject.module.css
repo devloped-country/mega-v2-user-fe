@@ -1,0 +1,10 @@
+.wrapper {
+  width: 350px;
+  margin: 0 auto;
+
+  font-size: 1.5rem;
+}
+
+.detailSubject {
+  margin: 10px 0 20px;
+}

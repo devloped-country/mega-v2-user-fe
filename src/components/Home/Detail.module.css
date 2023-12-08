@@ -1,0 +1,7 @@
+.wrapper {
+  width: 360px;
+
+  display: flex;
+  justify-content: space-between;
+  margin: 30px auto 0;
+}
