@@ -23,12 +23,13 @@ function QR() {
         },
       });
 
-      if (data) {
-        navigate('/qr/location');
-        return;
-      }
+      // if (data) {
+      //   navigate('/qr/location');
+      //   return;
+      // }
 
       const res = await axios(`/api/qr/${qr}`);
+      console.log(qr);
       console.log(res);
       if (res.data.responseCode === -1) {
         navigate('/qr/auth');
@@ -47,7 +48,7 @@ function QR() {
   return (
     <section className={styles.qrWrapper}>
       <QrReader
-        delay={2000}
+        delay={5000}
         onScan={handleResult}
         className={styles.qr}
         style={{ width: '100%', height: '100%' }}

@@ -9,13 +9,14 @@ const client = new SQSClient({
   },
 });
 const sqsQueueUrl =
-  'https://sqs.ap-northeast-3.amazonaws.com/503237308475/bsdev07-queue.fifo';
+  'https://sqs.ap-northeast-3.amazonaws.com/503237308475/bsdev07-queue';
+// 'https://sqs.ap-northeast-3.amazonaws.com/503237308475/bsdev07-queue.fifo';
 
 const mutater = async (result, email) => {
   const command = new SendMessageCommand({
     QueueUrl: sqsQueueUrl,
-    MessageGroupId: 'attendance-auth',
-    MessageDeduplicationId: uuid(),
+    // MessageGroupId: 'attendance-auth',
+    // MessageDeduplicationId: uuid(),
     MessageAttributes: {
       Email: {
         DataType: 'String',
@@ -30,7 +31,7 @@ const mutater = async (result, email) => {
         StringValue: result,
       },
     },
-    MessageBody: '입실 인증',
+    MessageBody: 'QR 인증',
   });
 
   return await client.send(command);
