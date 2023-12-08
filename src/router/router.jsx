@@ -14,15 +14,13 @@ import Leave from '@/pages/leave/Leave';
 import Note from '@/pages/note/Note';
 import NoteReceive from '@/pages/note/NoteReceive';
 import NoteEditor from '@/pages/note/NoteEditor';
-import CheckIn from '@/pages/qr/CheckIn';
-import CheckOut from '@/pages/qr/CheckOut';
 import Location from '@/pages/qr/Location';
 import Auth from '@/pages/qr/Auth';
-import ReAuth from '@/pages/qr/ReAuth';
 import SignUp from '@/pages/signup/SignUp';
 import Password from '@/pages/signup/Password';
 import Home from '../pages/home/Home';
 import Curriculum from '../pages/curriculum/Curriculum';
+import Success from '@/pages/qr/Success';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -30,11 +28,9 @@ export const router = createBrowserRouter(
       <Route path='/' element={<Layout />}>
         <Route index element={<Home />} />
         <Route path='/qr' element={<QR />} />
-        <Route path='/qr/checkin' element={<CheckIn />} />
-        <Route path='/qr/checkout' element={<CheckOut />} />
+        <Route path='/qr/success' element={<Success />} />
         <Route path='/qr/location' element={<Location />} />
         <Route path='/qr/auth' element={<Auth />} />
-        <Route path='/qr/reauth' element={<ReAuth />} />
         <Route path='/attendance' element={<Attendance />} />
         <Route path='/menu' element={<Menu />} />
         <Route path='/notice' element={<Notice />} />
