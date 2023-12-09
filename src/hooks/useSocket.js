@@ -6,7 +6,18 @@ export function useSocket(keys, fetcher, options) {
   const [to, setTo] = useState([]);
   const [title, setTitle] = useState("");
 
-  let myId = 2;
+  let myId = 16;
+
+  const sendMyIdToSocket = () => {
+    const connectObject = {
+      action: "sendMyId",
+      myRole: "student",
+      myId: myId,
+    };
+    const jsonMessage = JSON.stringify(connectObject);
+    console.log("sendMyIdToSocket!");
+    wSocket.send(jsonMessage);
+  };
 
   const initWebSocket = () => {
     wSocket.onopen = onOpen;
@@ -21,21 +32,14 @@ export function useSocket(keys, fetcher, options) {
     console.log("connect: ", e);
 
     if (wSocket) {
-      console.log("sendMyId보내야되는뎅");
-      const connectObject = {
-        action: "sendMyId",
-        myRole: "manager",
-        myId: myId,
-      };
-      const jsonMessage = JSON.stringify(connectObject);
-      console.log(typeof jsonMessage);
-      wSocket.send(jsonMessage);
+      sendMyIdToSocket();
     }
   };
 
   //$disconnect 때 실행되는 함수
   const onClose = () => {
     console.log("WebSocket closed!");
+    doOpen();
   };
 
   //웹소켓으로부터 메시지를 받았을 때 실행되는 함수
@@ -67,16 +71,15 @@ export function useSocket(keys, fetcher, options) {
       // connectionId는 웹소켓이 connect때 알아서 만듦. (람다에서 event.requestContext.connectionId;로 추출)
 
       const messageObject = {
-        action: "message",
-        from: "manager",
-        title: title,
-        message: message,
-        to: to, //배열임. userId
-        myId: myId, //하나임. adminId
+        action: "sendToManager",
+        from: myId,
+        to: [6, 1],
+        title: "유범아~~",
+        content: "오해하지마~~~테스트중~~",
       };
       // .send 웹소켓에 메시지 보내는 함수
       const jsonMessage = JSON.stringify(messageObject);
-      console.log(typeof jsonMessage);
+      console.log("메시지발송: " + jsonMessage);
 
       wSocket.send(jsonMessage);
     }
