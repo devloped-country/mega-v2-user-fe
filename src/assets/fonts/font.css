@@ -5,6 +5,7 @@
     url('@/assets/fonts/Pretendard-Thin.subset.woff') format('woff'),
     url('@/assets/fonts/Pretendard-Thin.ttf') format('ttf');
   font-weight: 100;
+  font-display: swap;
 }
 
 @font-face {
@@ -15,6 +16,7 @@
     url('@/assets/fonts/Pretendard-ExtraLight.subset.woff') format('woff'),
     url('@/assets/fonts/Pretendard-ExtraLight.ttf') format('ttf');
   font-weight: 200;
+  font-display: swap;
 }
 
 @font-face {
@@ -25,6 +27,7 @@
     url('@/assets/fonts/Pretendard-Light.subset.woff') format('woff'),
     url('@/assets/fonts/Pretendard-Light.ttf') format('ttf');
   font-weight: 300;
+  font-display: block;
 }
 
 @font-face {
@@ -35,6 +38,7 @@
     url('@/assets/fonts/Pretendard-Regular.subset.woff') format('woff'),
     url('@/assets/fonts/Pretendard-Regular.ttf') format('ttf');
   font-weight: 400;
+  font-display: block;
 }
 
 @font-face {
@@ -45,6 +49,7 @@
     url('@/assets/fonts/Pretendard-Medium.subset.woff') format('woff'),
     url('@/assets/fonts/Pretendard-Medium.ttf') format('ttf');
   font-weight: 500;
+  font-display: block;
 }
 
 @font-face {
@@ -55,6 +60,7 @@
     url('@/assets/fonts/Pretendard-SemiBold.subset.woff') format('woff'),
     url('@/assets/fonts/Pretendard-SemiBold.ttf') format('ttf');
   font-weight: 600;
+  font-display: block;
 }
 
 @font-face {
@@ -65,6 +71,7 @@
     url('@/assets/fonts/Pretendard-Bold.subset.woff') format('woff'),
     url('@/assets/fonts/Pretendard-Bold.ttf') format('ttf');
   font-weight: 700;
+  font-display: block;
 }
 
 @font-face {
@@ -75,6 +82,7 @@
     url('@/assets/fonts/Pretendard-ExtraBold.subset.woff') format('woff'),
     url('@/assets/fonts/Pretendard-ExtraBold.ttf') format('ttf');
   font-weight: 800;
+  font-display: block;
 }
 
 @font-face {
@@ -85,11 +93,11 @@
     url('@/assets/fonts/Pretendard-Black.subset.woff') format('woff'),
     url('@/assets/fonts/Pretendard-Black.ttf') format('ttf');
   font-weight: 900;
+  font-display: block;
 }
 
 * {
   font-family: 'Pretendard', sans-serif !important;
-  font-display: fallback;
 }
 
 html {

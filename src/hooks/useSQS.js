@@ -11,15 +11,15 @@ const client = new SQSClient({
 const sqsQueueUrl =
   'https://sqs.ap-northeast-3.amazonaws.com/503237308475/bsdev07-queue.fifo';
 
-const mutater = async (result) => {
+const mutater = async (result, email) => {
   const command = new SendMessageCommand({
     QueueUrl: sqsQueueUrl,
     MessageGroupId: 'attendance-auth',
     MessageDeduplicationId: uuid(),
     MessageAttributes: {
-      User: {
+      Email: {
         DataType: 'String',
-        StringValue: 1,
+        StringValue: email,
       },
       CreatedTime: {
         DataType: 'Number',
@@ -33,7 +33,7 @@ const mutater = async (result) => {
     MessageBody: '입실 인증',
   });
 
-  await client.send(command);
+  return await client.send(command);
 };
 
 export function useSQS() {
