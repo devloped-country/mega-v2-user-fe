@@ -4,6 +4,7 @@ import Detail from "../../components/Home/Detail";
 import NoticePreview from "../../components/Home/NoticePreview";
 import CurriculumPreview from "../../components/Home/CurriculumPreview";
 import AddBanner from "../../components/common/AddBanner";
+import styles from './Home.module.css';
 
 function Home() {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ function Home() {
     navigate('curriculum');
   }
   return(
-    <div>
+    <div className={styles.wrapper}>
     <Header
       headerText='병가ㆍ공가ㆍ조퇴를 신청해야하나요?'
       onButtonAction={handleAttendance}
