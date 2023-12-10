@@ -5,10 +5,19 @@ import { useEffect } from "react";
 
 export default function Layout() {
   const location = useLocation();
-  const { doOpen } = useSocket();
+  const { doOpen, sendMyIdToSocket } = useSocket();
 
   useEffect(() => {
     doOpen();
+
+    //30초마다 내 정보 쏴줌!
+    const timer = setInterval(() => {
+      sendMyIdToSocket();
+    }, 30000);
+
+    return () => {
+      clearInterval(timer);
+    };
   }, []);
 
   return (
