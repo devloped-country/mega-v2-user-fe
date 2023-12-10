@@ -4,6 +4,7 @@ import { useSQS } from '@/hooks/useSQS';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useGeoLocation } from '@/hooks/useGeoLocation';
+import { QrScanner } from '@yudiel/react-qr-scanner';
 
 function QR() {
   const { mutater: sqsMutate } = useSQS();
@@ -47,8 +48,13 @@ function QR() {
 
   return (
     <section className={styles.qrWrapper}>
+      {/* <QrScanner
+        onDecode={handleResult}
+        className={styles.qr}
+        containerStyle={{ width: '100%', height: '100%' }}
+      /> */}
       <QrReader
-        delay={5000}
+        delay={1000}
         onScan={handleResult}
         className={styles.qr}
         style={{ width: '100%', height: '100%' }}
