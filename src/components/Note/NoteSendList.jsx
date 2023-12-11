@@ -5,19 +5,19 @@ import styles from "./NoteList.module.css";
 import { useFetch } from "@/hooks/useFetch";
 import { useNewSocket } from "@/hooks/useNewSocket";
 
-function NoteReceiveList() {
+function NoteSendList() {
   const { receivedNotes } = useNewSocket();
   const [isShowingModal, setIsShowingModal] = useState(false);
   const [id, setId] = useState("");
 
-  //const { data, isLoading } = useFetch([], async () => await axios("/api"));
+  // const { data, isLoading } = useFetch([], async () => await axios("/api"));
 
   // if (isLoading) {
   //   return;
   // }
 
   useEffect(() => {
-    console.log(receivedNotes + "noteList");
+    console.log(receivedNotes);
   }, [receivedNotes]);
 
   const handleClickList = (id) => {
@@ -51,4 +51,4 @@ function NoteReceiveList() {
   );
 }
 
-export default NoteReceiveList;
+export default NoteSendList;

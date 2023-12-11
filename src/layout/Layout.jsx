@@ -1,8 +1,10 @@
 import { Link, Outlet, useLocation } from "react-router-dom";
 import styles from "./Layout.module.css";
+import { useNewSocket } from "@/hooks/useNewSocket";
 
 export default function Layout() {
   const location = useLocation();
+  useNewSocket();
 
   return (
     <section className={styles.wrapper}>

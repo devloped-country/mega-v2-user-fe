@@ -7,17 +7,29 @@ export const useNewSocket = () => {
   const [receivedNotes, setReceivedNotes] = useState([]);
   const [ReceivedAlarms, setReceivedAlarms] = useState([]);
 
+  const myId = 16;
+
+  const connectObject = {
+    action: "sendMyId",
+    myRole: "student",
+    myId: myId,
+  };
+
   useEffect(() => {
     initWebSocket();
   }, [receivedNotes]);
 
-  let myId = 16;
-  const sendMyIdToSocket = () => {
-    const connectObject = {
-      action: "sendMyId",
-      myRole: "student",
-      myId: myId,
+  useEffect(() => {
+    const timer = setInterval(() => {
+      doSend(connectObject);
+    }, 30000);
+
+    return () => {
+      clearInterval(timer);
     };
+  }, []);
+
+  const sendMyIdToSocket = () => {
     const jsonMessage = JSON.stringify(connectObject);
     console.log("sendMyIdToSocket!");
     wSocket.send(jsonMessage);
@@ -43,7 +55,7 @@ export const useNewSocket = () => {
   //$disconnect 때 실행되는 함수
   const onClose = () => {
     console.log("WebSocket closed!");
-    doOpen();
+    return doOpen();
   };
 
   //웹소켓으로부터 메시지를 받았을 때 실행되는 함수
@@ -53,7 +65,7 @@ export const useNewSocket = () => {
     const parsedData = JSON.parse(receivedData);
     if (parsedData.type) {
       if (parsedData.type === "note") {
-        console.log("쪽지!!!");
+        console.log("쪽지!!!y");
         setReceivedNotes((prevNotes) => [parsedData, ...prevNotes]);
       }
       if (parsedData.type === "alarm") {
