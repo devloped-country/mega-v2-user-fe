@@ -1,10 +1,10 @@
 import { useLocation } from "react-router-dom";
 import styles from "./NoteEditor.module.css";
 import ModalButton from "@components/common/ModalButton";
-import { useSocket } from "@/hooks/useSocket";
+import { useNewSocket } from "@/hooks/useNewSocket";
 
 function NoteEditor() {
-  const { doSend } = useSocket();
+  const { doSend } = useNewSocket();
   const location = useLocation();
 
   return (
@@ -19,7 +19,7 @@ function NoteEditor() {
         <ModalButton
           type="mutated"
           onAction={() => {
-            doSend();
+            doSend({ action: "sendToManager", type: "note", from: 16, to: [6], title: "wwww", content: "wwwwwww" });
           }}
           text="전송"
         />

@@ -1,24 +1,8 @@
 import { Link, Outlet, useLocation } from "react-router-dom";
 import styles from "./Layout.module.css";
-import { useSocket } from "@/hooks/useSocket";
-import { useEffect } from "react";
 
 export default function Layout() {
   const location = useLocation();
-  const { doOpen, sendMyIdToSocket } = useSocket();
-
-  useEffect(() => {
-    doOpen();
-
-    //30초마다 내 정보 쏴줌!
-    const timer = setInterval(() => {
-      sendMyIdToSocket();
-    }, 30000);
-
-    return () => {
-      clearInterval(timer);
-    };
-  }, []);
 
   return (
     <section className={styles.wrapper}>
