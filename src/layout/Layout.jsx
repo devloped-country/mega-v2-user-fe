@@ -1,15 +1,8 @@
 import { Link, Outlet, useLocation } from "react-router-dom";
 import styles from "./Layout.module.css";
-import { useSocket } from "@/hooks/useSocket";
-import { useEffect } from "react";
 
 export default function Layout() {
   const location = useLocation();
-  const { doOpen } = useSocket();
-
-  useEffect(() => {
-    doOpen();
-  }, []);
 
   return (
     <section className={styles.wrapper}>

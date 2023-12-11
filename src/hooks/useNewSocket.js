@@ -1,7 +1,9 @@
-import { useCallback, useEffect, useState } from "react";
+import useSocketStore from "@/store/useSocketStore.js";
+import { useEffect, useState } from "react";
+import { shallow } from "zustand/shallow";
 
-export function useSocket() {
-  const [wSocket, setWSocket] = useState(new WebSocket("wss://fx3kyx3yj7.execute-api.ap-northeast-3.amazonaws.com/bsdev08_production/"));
+export const useNewSocket = () => {
+  const wSocket = useSocketStore((state) => state.wSocket, shallow);
   const [receivedNotes, setReceivedNotes] = useState([]);
   const [ReceivedAlarms, setReceivedAlarms] = useState([]);
 
@@ -85,4 +87,4 @@ export function useSocket() {
   };
 
   return { doOpen, doSend, sendMyIdToSocket, receivedNotes, ReceivedAlarms };
-}
+};
