@@ -30,8 +30,7 @@ function QR() {
       // }
 
       const res = await axios(`/api/qr/${qr}`);
-      console.log(qr);
-      console.log(res);
+
       if (res.data.responseCode === -1) {
         navigate('/qr/auth');
         return;
