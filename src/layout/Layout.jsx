@@ -1,20 +1,16 @@
-import { Link, Outlet, useLocation } from 'react-router-dom';
-import styles from './Layout.module.css';
+import { Link, Outlet, useLocation } from "react-router-dom";
+import styles from "./Layout.module.css";
 
 export default function Layout() {
   const location = useLocation();
 
   return (
     <section className={styles.wrapper}>
-      {location.pathname !== '/qr' && (
-        <header className={styles.header}>Mega</header>
-      )}
-      <section
-        className={`${styles.main} ${location.pathname === '/qr' && styles.qr}`}
-      >
+      {location.pathname !== "/qr" && <header className={styles.header}>Mega</header>}
+      <section className={`${styles.main} ${location.pathname === "/qr" && styles.qr}`}>
         <Outlet />
       </section>
-      {!location.pathname.includes('/qr/') && (
+      {!location.pathname.includes("/qr/") && (
         <nav className={styles.nav}>
           <ul className={styles.menuList}>
             <li className={styles.menuItem}>
