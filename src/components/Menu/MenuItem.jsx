@@ -10,9 +10,7 @@ function MenuItem({ img, text, to }) {
           <h4 className={styles.title}>{text}</h4>
         </div>
         <img
-          src={`${
-            import.meta.env.VITE_CLOUD_FRONT_ID
-          }/free-icon-font-angle-right-3916949 1.svg`}
+          src={`https://d2f3kqq80r3o3g.cloudfront.net/free-icon-font-angle-right-3916949 1.svg`}
           alt='화살표'
         />
       </Link>
