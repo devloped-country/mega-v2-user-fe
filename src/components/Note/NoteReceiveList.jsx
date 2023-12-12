@@ -28,7 +28,7 @@ function NoteReceiveList() {
       </ul>
       {isShowingModal && <NoteModal handleClose={handleClose} id={id} />}
       <img
-        src={`${import.meta.env.VITE_CLOUD_FRONT_ID}/Frame 565.svg`}
+        src={`https://d2f3kqq80r3o3g.cloudfront.net/Frame 565.svg`}
         alt='메일 삭제'
         className={styles.button}
       />

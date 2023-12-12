@@ -20,9 +20,7 @@ export default function Layout() {
             <li className={styles.menuItem}>
               <Link to='/' className={styles.link}>
                 <img
-                  src={`${
-                    import.meta.env.VITE_CLOUD_FRONT_ID
-                  }/free-icon-font-home-3917033 1.svg`}
+                  src={`https://d2f3kqq80r3o3g.cloudfront.net/free-icon-font-home-3917033 1.svg`}
                   alt='home'
                   className={styles.menuIcon}
                 />
@@ -32,9 +30,7 @@ export default function Layout() {
             <li className={styles.menuItem}>
               <Link to='/qr' className={styles.link}>
                 <img
-                  src={`${
-                    import.meta.env.VITE_CLOUD_FRONT_ID
-                  }/free-icon-font-qr-scan-12436470 1.svg`}
+                  src={`https://d2f3kqq80r3o3g.cloudfront.net/free-icon-font-qr-scan-12436470 1.svg`}
                   alt='qr'
                   className={styles.menuIcon}
                 />
@@ -44,9 +40,7 @@ export default function Layout() {
             <li className={styles.menuItem}>
               <Link to='/attendance' className={styles.link}>
                 <img
-                  src={`${
-                    import.meta.env.VITE_CLOUD_FRONT_ID
-                  }/free-icon-font-calendar-check-7602580 1.svg`}
+                  src={`https://d2f3kqq80r3o3g.cloudfront.net/free-icon-font-calendar-check-7602580 1.svg`}
                   alt='attendance'
                   className={styles.menuIcon}
                 />
@@ -56,9 +50,7 @@ export default function Layout() {
             <li className={styles.menuItem}>
               <Link to='/menu' className={styles.link}>
                 <img
-                  src={`${
-                    import.meta.env.VITE_CLOUD_FRONT_ID
-                  }/free-icon-font-menu-dots-3917075 1.svg`}
+                  src={`https://d2f3kqq80r3o3g.cloudfront.net/free-icon-font-menu-dots-3917075 1.svg`}
                   alt='home'
                   className={styles.menuIcon}
                 />

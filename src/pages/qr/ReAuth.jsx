@@ -8,7 +8,7 @@ function ReAuth() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.innerWrapper}>
-        <img src={`${import.meta.env.VITE_CLOUD_FRONT_ID}/reauth 1.svg`} />
+        <img src={`https://d2f3kqq80r3o3g.cloudfront.net/reauth 1.svg`} />
         <h2 className={styles.title}>재인증 실패</h2>
         <p className={styles.desc}>재인증은 하실 수 없어요.</p>
         <ModalButton

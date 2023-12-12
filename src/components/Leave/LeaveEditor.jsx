@@ -7,7 +7,7 @@ function LeaveEdtior() {
       <div className={styles.title}>
         조퇴
         <img
-          src={`${import.meta.env.VITE_CLOUD_FRONT_ID}/caret-down 2.svg`}
+          src={`https://d2f3kqq80r3o3g.cloudfront.net/caret-down 2.svg`}
           alt='화살표'
         />
       </div>
