@@ -17,20 +17,45 @@ function NoteContent() {
   return (
     <>
       <ul className={styles.noteList}>
+<<<<<<< HEAD
         <li className={styles.noteItem} onClick={() => navigate("/note/receive")}>
           <img src={`${import.meta.env.VITE_CLOUD_FRONT_ID}/free-icon-font-calendar-check-7602580.svg`} />
           수신쪽지함
         </li>
         <li className={styles.noteItem} onClick={() => navigate("/note/send")}>
           <img src={`${import.meta.env.VITE_CLOUD_FRONT_ID}/free-icon-font-calendar-exclamation-7602584.svg`} />
+=======
+        <li
+          className={styles.noteItem}
+          onClick={() => navigate('/note/receive')}
+        >
+          <img
+            src={`https://d2f3kqq80r3o3g.cloudfront.net/free-icon-font-calendar-check-7602580.svg`}
+          />
+          수신쪽지함
+        </li>
+        <li className={styles.noteItem}>
+          <img
+            src={`https://d2f3kqq80r3o3g.cloudfront.net/free-icon-font-calendar-exclamation-7602584.svg`}
+          />
+>>>>>>> 9e4f7f6d901b1400edd1291e4ab408a6a7347188
           발신쪽지함
         </li>
         <li className={styles.noteItem}>
-          <img src={`${import.meta.env.VITE_CLOUD_FRONT_ID}/trash 1.svg`} />
+          <img src={`https://d2f3kqq80r3o3g.cloudfront.net/trash 1.svg`} />
           휴지통
         </li>
       </ul>
+<<<<<<< HEAD
       <img src={`${import.meta.env.VITE_CLOUD_FRONT_ID}/Frame 565-1.svg`} alt="메일 보내기" className={styles.button} onClick={handleClickMailSendButton} />
+=======
+      <img
+        src={`https://d2f3kqq80r3o3g.cloudfront.net/Frame 565-1.svg`}
+        alt='메일 보내기'
+        className={styles.button}
+        onClick={handleClickMailSendButton}
+      />
+>>>>>>> 9e4f7f6d901b1400edd1291e4ab408a6a7347188
       {isShowingReceiverModal && (
         <>
           <ul className={styles.receiverList}>

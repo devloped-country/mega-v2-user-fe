@@ -8,7 +8,7 @@ function Location() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.innerWrapper}>
-        <img src={`${import.meta.env.VITE_CLOUD_FRONT_ID}/25519 1.svg`} />
+        <img src={`https://d2f3kqq80r3o3g.cloudfront.net/25519 1.svg`} />
         <h2 className={styles.title}>위치인증 실패</h2>
         <p className={styles.desc}>강의장에서 인증해주세요.</p>
         <ModalButton

@@ -5,7 +5,7 @@ function MenuHeader() {
     <section className={styles.wrapper}>
       <img
         className={styles.profile}
-        src={`${import.meta.env.VITE_CLOUD_FRONT_ID}/User-56.svg`}
+        src={`https://d2f3kqq80r3o3g.cloudfront.net/User-56.svg`}
         alt='프로필'
       />
       <h3 className={styles.userName}>김유범</h3>
