@@ -19,7 +19,8 @@ function Login() {
     async (param) =>
       await axios({ url: '/api/auth/login', method: 'post', data: param }),
     {
-      onSuccess: () => {
+      onSuccess: (data) => {
+        console.log(data);
         navigate('/', { state: { email: authInfo.email } });
       },
       onerror: () => {
@@ -29,7 +30,10 @@ function Login() {
   );
 
   const onClickLogin = () => {
-    mutate();
+    mutate({
+      email: authInfo.email,
+      password: authInfo.password,
+    });
   };
 
   return (
@@ -51,7 +55,7 @@ function Login() {
               className={styles.input}
               value={authInfo.email}
               onChange={({ target }) =>
-                setAuthInfo((prev) => ({ ...prev, email: target }))
+                setAuthInfo((prev) => ({ ...prev, email: target.value }))
               }
               onFocus={() => setIsFocusEmailInput(true)}
               onBlur={() => setIsFocusEmailInput(false)}
@@ -68,7 +72,7 @@ function Login() {
               className={styles.input}
               value={authInfo.password}
               onChange={({ target }) =>
-                setAuthInfo((prev) => ({ ...prev, password: target }))
+                setAuthInfo((prev) => ({ ...prev, password: target.value }))
               }
               onFocus={() => setIsFocusPasswordInput(true)}
               onBlur={() => setIsFocusPasswordInput(false)}
@@ -79,7 +83,7 @@ function Login() {
               이메일 또는 비밀번호가 틀렸어요
             </span>
           )}
-          <button className={styles.login} type='submit'>
+          <button className={styles.login} type='submit' onClick={onClickLogin}>
             로그인
           </button>
         </form>
