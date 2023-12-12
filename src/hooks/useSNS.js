@@ -10,9 +10,10 @@ const client = new SNSClient({
 
 export const subscribeQueue = async () => {
   const command = new SubscribeCommand({
-    TopicArn: 'arn:aws:sns:ap-northeast-3:503237308475:bsdev07-sns.fifo',
+    TopicArn: 'arn:aws:sns:ap-northeast-3:503237308475:bsdev07-dashboard',
     Protocol: 'sqs',
-    Endpoint: 'arn:aws:sqs:ap-northeast-3:503237308475:bsdev07-queue.fifo',
+    Endpoint:
+      'https://sqs.ap-northeast-3.amazonaws.com/503237308475/bsdev07-queue',
   });
 
   const response = await client.send(command);
