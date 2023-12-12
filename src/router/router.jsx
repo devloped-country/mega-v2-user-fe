@@ -21,6 +21,9 @@ import Password from '@/pages/signup/Password';
 import Home from '../pages/home/Home';
 import Curriculum from '../pages/curriculum/Curriculum';
 import Success from '@/pages/qr/Success';
+import Info from '../pages/info/Info';
+import EditPassword from '../components/Info/EditPassword';
+import EditInfo from '../pages/info/EditInfo';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -40,6 +43,9 @@ export const router = createBrowserRouter(
         <Route path='/note/receive' element={<NoteReceive />} />
         <Route path='/note/editor' element={<NoteEditor />} />
         <Route path='/curriculum' element={<Curriculum />} />
+        <Route path='/info' element={<Info />}/>
+        <Route path='/info/edit' element={<EditInfo />}/>
+        <Route path='/info/password' element={<EditPassword />}/>
       </Route>
       <Route path='/login'>
         <Route index element={<Login />} />
