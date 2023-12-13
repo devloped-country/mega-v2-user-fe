@@ -41,3 +41,9 @@
 html {
   overflow: hidden;
 }
+
+button:disabled {
+  background-color: var(--color-gray-200);
+  border: none;
+  cursor: default;
+}

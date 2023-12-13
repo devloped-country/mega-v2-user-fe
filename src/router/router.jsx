@@ -10,37 +10,137 @@ import Leave from "@/pages/leave/Leave";
 import Note from "@/pages/note/Note";
 import NoteReceive from "@/pages/note/NoteReceive";
 import NoteEditor from "@/pages/note/NoteEditor";
-import CheckIn from "@/pages/qr/CheckIn";
-import CheckOut from "@/pages/qr/CheckOut";
 import Location from "@/pages/qr/Location";
 import Auth from "@/pages/qr/Auth";
-import ReAuth from "@/pages/qr/ReAuth";
 import SignUp from "@/pages/signup/SignUp";
 import Password from "@/pages/signup/Password";
 import Home from "@/pages/home/Home";
 import Curriculum from "@/pages/curriculum/Curriculum";
 import Success from "@/pages/qr/Success";
-import NoteSend from "@/pages/note/NoteSend";
+import Info from "../pages/info/Info";
+import EditInfo from "../pages/info/EditInfo";
+import EditPassword from "../pages/info/EditPassword";
+import NavigationGuard from "@/components/common/NavigationGuard";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/" element={<Layout />}>
-        <Route index element={<Home />} />
-        <Route path="/qr" element={<QR />} />
-        <Route path="/qr/success" element={<Success />} />
-        <Route path="/qr/location" element={<Location />} />
-        <Route path="/qr/auth" element={<Auth />} />
-        <Route path="/attendance" element={<Attendance />} />
-        <Route path="/menu" element={<Menu />} />
-        <Route path="/notice" element={<Notice />} />
-        <Route path="/notice/:id" element={<NoticeDetail />} />
-        <Route path="/leave" element={<Leave />} />
-        <Route path="/note" element={<Note />} />
-        <Route path="/note/receive" element={<NoteReceive />} />
-        <Route path="/note/send" element={<NoteSend />} />
-        <Route path="/note/editor" element={<NoteEditor />} />
-        <Route path="/curriculum" element={<Curriculum />} />
+        <Route path="/info" element={<Info />} />
+        <Route path="/info/edit" element={<EditInfo />} />
+        <Route path="/info/password" element={<EditPassword />} />
+        <Route
+          index
+          element={
+            <NavigationGuard>
+              <Home />
+            </NavigationGuard>
+          }
+        />
+        <Route
+          path="/qr"
+          element={
+            <NavigationGuard>
+              <QR />
+            </NavigationGuard>
+          }
+        />
+        <Route
+          path="/qr/success"
+          element={
+            <NavigationGuard>
+              <Success />
+            </NavigationGuard>
+          }
+        />
+        <Route
+          path="/qr/location"
+          element={
+            <NavigationGuard>
+              <Location />
+            </NavigationGuard>
+          }
+        />
+        <Route
+          path="/qr/auth"
+          element={
+            <NavigationGuard>
+              <Auth />
+            </NavigationGuard>
+          }
+        />
+        <Route
+          path="/attendance"
+          element={
+            <NavigationGuard>
+              <Attendance />
+            </NavigationGuard>
+          }
+        />
+        <Route
+          path="/menu"
+          element={
+            <NavigationGuard>
+              <Menu />
+            </NavigationGuard>
+          }
+        />
+        <Route
+          path="/notice"
+          element={
+            <NavigationGuard>
+              <Notice />
+            </NavigationGuard>
+          }
+        />
+        <Route
+          path="/notice/:id"
+          element={
+            <NavigationGuard>
+              <NoticeDetail />
+            </NavigationGuard>
+          }
+        />
+        <Route
+          path="/leave"
+          element={
+            <NavigationGuard>
+              <Leave />
+            </NavigationGuard>
+          }
+        />
+        <Route
+          path="/note"
+          element={
+            <NavigationGuard>
+              <Note />
+            </NavigationGuard>
+          }
+        />
+        <Route
+          path="/note/receive"
+          element={
+            <NavigationGuard>
+              <NoteReceive />
+            </NavigationGuard>
+          }
+        />
+        <Route
+          path="/note/editor"
+          element={
+            <NavigationGuard>
+              <NoteEditor />
+            </NavigationGuard>
+          }
+        />
+        <Route
+          path="/curriculum"
+          element={
+            <NavigationGuard>
+              <Curriculum />
+            </NavigationGuard>
+          }
+        />
       </Route>
       <Route path="/login">
         <Route index element={<Login />} />

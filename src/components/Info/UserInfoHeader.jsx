@@ -1,10 +1,9 @@
-import styles from './MenuHeader.module.css';
+import styles from './UserInfoHeader.module.css';
 
-function MenuHeader({onButtonAction}) {
+function UserInfoHeader() {
 
   return (
     <section className={styles.wrapper}>
-      <button onClick={onButtonAction} className={styles.intoUserInfo}>
         <img
           className={styles.profile}
           src={`${import.meta.env.VITE_CLOUD_FRONT_ID}/User-56.svg`}
@@ -14,9 +13,9 @@ function MenuHeader({onButtonAction}) {
         <p className={styles.course}>
           클라우드 네이티브 애플리케이션 개발자 양성과정
         </p>
-      </button>
+        
     </section>
   );
 }
 
-export default MenuHeader;
+export default UserInfoHeader;
