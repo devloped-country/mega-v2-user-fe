@@ -1,14 +1,17 @@
 import { useNavigate } from 'react-router-dom';
 import styles from './SignUp.module.css';
-import { useReducer, useState } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import { initialSignupState, signupReducer } from '@/reducer/singupReducer';
 import axios from 'axios';
 import { useMutation } from '@/hooks/useMutation';
 
 function SignUp() {
   const [signupState, dispatch] = useReducer(signupReducer, initialSignupState);
-  const [isAuth, setIsAuth] = useState(false);
+  const [isAuth, setIsAuth] = useState(true);
   const navigate = useNavigate();
+  const [isSubmitButtonActive, setIsSubmitButtonActive] = useState(true);
+  const [isAuthButtonActive, setIsAuthButtonActive] = useState(true);
+  const [userId, setUserId] = useState();
 
   const { mutate } = useMutation(
     async (param) =>
@@ -16,7 +19,19 @@ function SignUp() {
         url: '/api/auth/identify/check',
         method: 'post',
         data: param,
-      })
+      }),
+    {
+      onSuccess: ({ data }) => {
+        setUserId(data.data);
+        setIsSubmitButtonActive(true);
+        setIsAuthButtonActive(false);
+
+        setTimeout(() => {
+          setIsSubmitButtonActive(false);
+          setIsAuthButtonActive(true);
+        }, 60000);
+      },
+    }
   );
 
   const { mutate: authMutate } = useMutation(
@@ -28,17 +43,27 @@ function SignUp() {
       }),
     {
       onSuccess: () => {
-        setIsAuth(true);
+        setIsAuth(false);
       },
     }
   );
 
-  const onClickAuthNumberSend = () => {
+  useEffect(() => {
     const { name, phone, email, check } = signupState;
 
-    if (!name && !phone && !email && !check) {
+    if (!name || !phone || !email || !check) {
       return;
     }
+
+    if (!isAuthButtonActive && isSubmitButtonActive) {
+      return;
+    }
+
+    setIsSubmitButtonActive(false);
+  }, [signupState]);
+
+  const onClickAuthNumberSend = () => {
+    const { name, phone, email, check } = signupState;
 
     mutate({
       name,
@@ -49,20 +74,20 @@ function SignUp() {
   };
 
   const onClickAuthNumber = () => {
-    const { auth, email } = signupState;
+    const { auth } = signupState;
 
     if (!auth) {
       return;
     }
 
     authMutate({
-      id: email,
+      id: userId,
       certificationNumber: auth,
     });
   };
 
   const onNext = () => {
-    isAuth && navigate('/signup/password');
+    navigate('/signup/password', { state: { id: userId } });
   };
 
   return (
@@ -141,6 +166,7 @@ function SignUp() {
         <button
           type='button'
           className={styles.submit}
+          disabled={isSubmitButtonActive}
           onClick={onClickAuthNumberSend}
         >
           전송
@@ -160,11 +186,17 @@ function SignUp() {
           type='button'
           className={styles.auth}
           onClick={onClickAuthNumber}
+          disabled={isAuthButtonActive}
         >
           인증
         </button>
       </div>
-      <button type='button' className={styles.button} onClick={onNext}>
+      <button
+        type='button'
+        className={styles.button}
+        onClick={onNext}
+        disabled={isAuth}
+      >
         확인
       </button>
     </section>

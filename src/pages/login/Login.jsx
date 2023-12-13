@@ -19,9 +19,13 @@ function Login() {
     async (param) =>
       await axios({ url: '/api/auth/login', method: 'post', data: param }),
     {
-      onSuccess: (data) => {
-        console.log(data);
-        navigate('/', { state: { email: authInfo.email } });
+      onSuccess: ({ data }) => {
+        if (data.token) {
+          localStorage.setItem('token', data.token);
+          navigate('/', { state: { email: authInfo.email } });
+        } else {
+          navigate('/signup/auth');
+        }
       },
       onerror: () => {
         setIsShowingValidateMessage(true);
@@ -39,7 +43,7 @@ function Login() {
   return (
     <section className={styles.wrapper}>
       <main className={styles.main}>
-        <h2 className={styles.slogan}>새로운 LMS의 시작, Mega</h2>
+        <h2 className={styles.slogan}>새로운 출결관리의 시작, Mega</h2>
         <h4 className={styles.subSlogan}>
           당신은 미래의 학습을 이끄는 주인공입니다.
         </h4>
