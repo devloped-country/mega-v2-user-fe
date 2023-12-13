@@ -21,6 +21,8 @@ import Info from "../pages/info/Info";
 import EditInfo from "../pages/info/EditInfo";
 import EditPassword from "../pages/info/EditPassword";
 import NavigationGuard from "@/components/common/NavigationGuard";
+import NoteSend from "@/pages/note/NoteSend";
+import NoteTrash from "@/pages/note/NoteTrash";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -138,6 +140,22 @@ export const router = createBrowserRouter(
           element={
             <NavigationGuard>
               <Curriculum />
+            </NavigationGuard>
+          }
+        />
+        <Route
+          path="/note/send"
+          element={
+            <NavigationGuard>
+              <NoteSend />
+            </NavigationGuard>
+          }
+        />
+        <Route
+          path="/note/trash"
+          element={
+            <NavigationGuard>
+              <NoteTrash />
             </NavigationGuard>
           }
         />

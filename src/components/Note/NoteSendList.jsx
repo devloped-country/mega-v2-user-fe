@@ -3,22 +3,20 @@ import NoteItem from "./NoteItem";
 import NoteModal from "./NoteModal";
 import styles from "./NoteList.module.css";
 import { useFetch } from "@/hooks/useFetch";
-import { useNewSocket } from "@/hooks/useNewSocket";
 
 function NoteSendList() {
-  const { receivedNotes } = useNewSocket();
   const [isShowingModal, setIsShowingModal] = useState(false);
-  const [id, setId] = useState("");
+  // const [id, setId] = useState("");
 
-  // const { data, isLoading } = useFetch([], async () => await axios("/api"));
+  const { data, isLoading } = useFetch([], async () => await axios("/api/note/sent"));
 
-  // if (isLoading) {
-  //   return;
-  // }
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
-  useEffect(() => {
-    console.log(receivedNotes);
-  }, [receivedNotes]);
+  if (!data || data.length === 0) {
+    return <div>No sent notes.</div>;
+  }
 
   const handleClickList = (id) => {
     setIsShowingModal(true);
@@ -32,12 +30,9 @@ function NoteSendList() {
   return (
     <section className={styles.wrapper}>
       <ul className={styles.noteList}>
-        {receivedNotes.map((note, index) => (
-          <NoteItem key={index} title={note.title} desc={note.content} date={note.date} onClick={() => handleClickList(index)} />
-        ))}
-        {/* {data.map(({ id, title, desc, date }) => {
-          <NoteItem key={id} title={title} desc={desc} date={date} onClick={() => handleClickList(id)} />;
-        })} */}
+        {data.map(({ id, title, content, time }) => {
+          <NoteItem key={id} title={title} desc={content} date={time} onClick={() => handleClickList(id)} />;
+        })}
         {/* <NoteItem
           title="김예진 매니저님"
           desc="안녕하세요, 훈련수당은 20일 기준 적용안녕하세요, 훈련수당은 20일 기준 적용안녕하세요, 훈련수당은 20일 기준 적용안녕하세요, 훈련수당은 20일 기준 적용안녕하세요, 훈련수당은 20일 기준 적용"

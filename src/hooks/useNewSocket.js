@@ -17,6 +17,7 @@ export const useNewSocket = () => {
 
   useEffect(() => {
     initWebSocket();
+    console.log(receivedNotes);
   }, [receivedNotes]);
 
   useEffect(() => {

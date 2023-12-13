@@ -5,6 +5,7 @@
   align-items: center;
   border-bottom: 1px solid var(--color-gray-600);
   cursor: pointer;
+  position: relative;
 }
 
 .leftWrapper {
@@ -34,4 +35,15 @@
 .date {
   font-size: 1.2rem;
   color: var(--color-gray-300);
+}
+
+.unread::before {
+  content: "";
+  width: 10px; /* 빨간 점의 크기 조절 */
+  height: 10px;
+  background-color: #ff5555; /* 빨간색 */
+  border-radius: 50%; /* 원 모양으로 만들기 */
+  position: absolute;
+  top: 8px; /* 점의 위치 조절, 상단 여백과 맞춤 */
+  right: 8px; /* 점의 위치 조절, 우측 여백과 맞춤 */
 }
