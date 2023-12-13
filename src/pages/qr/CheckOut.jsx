@@ -8,9 +8,7 @@ function CheckOut() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.innerWrapper}>
-        <img
-          src={`${import.meta.env.VITE_CLOUD_FRONT_ID}/party_popper 1.svg`}
-        />
+        <img src={`https://d2f3kqq80r3o3g.cloudfront.net/party_popper 1.svg`} />
         <h2 className={styles.title}>퇴실 완료</h2>
         <ModalButton
           type='mutated'

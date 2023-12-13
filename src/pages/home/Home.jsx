@@ -15,10 +15,11 @@ function Home() {
 
   const handleNotice = () => {
     navigate('notice');
-  }
+  };
 
   const handleCurriculum = () => {
     navigate('curriculum');
+
   }
   return(
     <div className={styles.wrapper}>
@@ -50,7 +51,6 @@ function Home() {
       startDate='23.11.21'
       endDate='23.12.18'
     />
-    
     </div>
   );
 }
