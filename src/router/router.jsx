@@ -21,12 +21,18 @@ import Password from '@/pages/signup/Password';
 import Home from '@/pages/home/Home';
 import Curriculum from '@/pages/curriculum/Curriculum';
 import Success from '@/pages/qr/Success';
+import Info from '../pages/info/Info';
+import EditInfo from '../pages/info/EditInfo';
+import EditPassword from '../pages/info/EditPassword';
 import NavigationGuard from '@/components/common/NavigationGuard';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path='/' element={<Layout />}>
+        <Route path='/info' element={<Info />}/>
+        <Route path='/info/edit' element={<EditInfo />}/>
+        <Route path='/info/password' element={<EditPassword />}/>
         <Route
           index
           element={
