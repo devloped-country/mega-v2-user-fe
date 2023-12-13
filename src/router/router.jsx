@@ -147,14 +147,7 @@ export const router = createBrowserRouter(
         <Route index element={<SignUp />} />
       </Route>
       <Route path='/signup/password'>
-        <Route
-          index
-          element={
-            <NavigationGuard>
-              <Password />
-            </NavigationGuard>
-          }
-        />
+        <Route index element={<Password />} />
       </Route>
     </>
   )

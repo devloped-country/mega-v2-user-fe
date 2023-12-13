@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './Password.module.css';
-import { useReducer } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import { initialSignupState, signupReducer } from '@/reducer/singupReducer';
 import axios from 'axios';
 import { useMutation } from '@/hooks/useMutation';
@@ -9,6 +9,7 @@ function Password() {
   const [signupState, dispatch] = useReducer(signupReducer, initialSignupState);
   const navigate = useNavigate();
   const location = useLocation();
+  const [isActiveButton, setIsActiveButton] = useState(true);
 
   const { mutate } = useMutation(
     async (param) =>
@@ -24,6 +25,20 @@ function Password() {
     }
   );
 
+  useEffect(() => {
+    const { password, passwordConfirm } = signupState;
+
+    if (
+      password.length &&
+      passwordConfirm.length &&
+      password === passwordConfirm
+    ) {
+      setIsActiveButton(false);
+    } else {
+      setIsActiveButton(true);
+    }
+  }, [signupState]);
+
   const onNext = () => {
     const { password, passwordConfirm } = signupState;
 
@@ -31,9 +46,8 @@ function Password() {
       return;
     }
 
-    console.log(signupState);
     mutate({
-      id: location.state.email,
+      id: location.state.id,
       password,
     });
   };
@@ -63,7 +77,12 @@ function Password() {
           })
         }
       />
-      <button type='button' className={styles.button} onClick={onNext}>
+      <button
+        type='button'
+        className={styles.button}
+        onClick={onNext}
+        disabled={isActiveButton}
+      >
         확인
       </button>
     </section>
