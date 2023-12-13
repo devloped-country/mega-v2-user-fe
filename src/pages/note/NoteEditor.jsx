@@ -5,6 +5,7 @@ import styles from "./NoteEditor.module.css";
 import ModalButton from "@components/common/ModalButton";
 import { useNewSocket } from "@/hooks/useNewSocket";
 import { useMutation } from "@/hooks/useMutation";
+import axios from "axios";
 
 function NoteEditor() {
   const navigate = useNavigate();
@@ -13,11 +14,21 @@ function NoteEditor() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
-  const { mutate } = useMutation(async (params) => await axios({ url: "/api/note/register", method: "post", data: params }), {
-    onSuccess: () => {
-      navigate("/note");
-    },
-  });
+  const { mutate } = useMutation(
+    async () =>
+      await axios({
+        url: "/api/note/register",
+        method: "post",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }),
+    {
+      onSuccess: () => {
+        navigate("/note");
+      },
+    }
+  );
 
   return (
     <div className={styles.wrapper}>
@@ -34,13 +45,13 @@ function NoteEditor() {
             await doSend({
               action: "sendToManager",
               type: "note",
-              from: 16,
-              to: [location.state.managerId],
+              from: parseInt(localStorage.getItem("id")),
+              to: [location.state.receiverId],
               title: title,
               content: content,
             });
             await mutate({
-              to: [location.state.managerId],
+              to: [location.state.receiverId],
               title: title,
               content: content,
             });

@@ -12,7 +12,20 @@ function NoteReceiveList() {
   const [isShowingModal, setIsShowingModal] = useState(false);
   const [selectedNoteIds, setSelectedNoteIds] = useState([]);
 
-  const { data, isLoading } = useFetch([], async () => await axios("/api/note/received"));
+  const { data, isLoading } = useFetch(
+    [],
+    async () =>
+      await axios({
+        url: "/api/note/received",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+  );
+
+  useEffect(() => {
+    console.log(receivedNotes + "noteList");
+  }, [receivedNotes]);
 
   const handleDeleteSelectedNotes = async () => {
     try {
@@ -57,12 +70,6 @@ function NoteReceiveList() {
           data.map(({ id, title, content, time, isRead }) => {
             <NoteItem key={id} title={title} desc={content} date={time} isRead={isRead} isSelected={selectedNoteIds.includes(id)} onClick={() => handleClickList(id)} />;
           })}
-        {/* <NoteItem
-          title="김예진 매니저님"
-          desc="안녕하세요, 훈련수당은 20일 기준 적용안녕하세요, 훈련수당은 20일 기준 적용안녕하세요, 훈련수당은 20일 기준 적용안녕하세요, 훈련수당은 20일 기준 적용안녕하세요, 훈련수당은 20일 기준 적용"
-          date="2023-10-26"
-          onClick={() => handleClickList(1)}
-        /> */}
       </ul>
       {isShowingModal && <NoteModal handleClose={handleClose} id={id} />}
       <img src={`https://d2f3kqq80r3o3g.cloudfront.net/Frame 565.svg`} alt="메일 삭제" className={styles.button} onClick={handleDeleteSelectedNotes} />

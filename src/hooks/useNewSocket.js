@@ -7,7 +7,7 @@ export const useNewSocket = () => {
   const [receivedNotes, setReceivedNotes] = useState([]);
   const [ReceivedAlarms, setReceivedAlarms] = useState([]);
 
-  const myId = 16;
+  const myId = parseInt(localStorage.getItem("id"));
 
   const connectObject = {
     action: "sendMyId",
@@ -19,6 +19,11 @@ export const useNewSocket = () => {
     initWebSocket();
     console.log(receivedNotes);
   }, [receivedNotes]);
+
+  useEffect(() => {
+    initWebSocket();
+    console.log(ReceivedAlarms);
+  }, [ReceivedAlarms]);
 
   useEffect(() => {
     const timer = setInterval(() => {

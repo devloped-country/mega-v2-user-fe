@@ -8,7 +8,16 @@ function NoteSendList() {
   const [isShowingModal, setIsShowingModal] = useState(false);
   // const [id, setId] = useState("");
   const [selectedNoteIds, setSelectedNoteIds] = useState([]);
-  const { data, isLoading } = useFetch([], async () => await axios("/api/note/trash"));
+  const { data, isLoading } = useFetch(
+    [],
+    async () =>
+      await axios({
+        url: "/api/note/trash",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+  );
 
   if (isLoading) {
     return <div>Loading...</div>;
