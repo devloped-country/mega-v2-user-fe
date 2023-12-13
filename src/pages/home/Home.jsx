@@ -10,7 +10,7 @@ function Home() {
   const navigate = useNavigate();
 
   const handleAttendance = () => {
-    navigate('attendance');
+    navigate('leave');
   }
 
   const handleNotice = () => {

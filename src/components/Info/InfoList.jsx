@@ -1,14 +1,14 @@
 import UserContent from "./UserContent";
 import styles from "./InfoList.module.css";
-import EditPassword from "./EditPassword";
 import { useNavigate } from "react-router-dom";
+import MoveEditPassword from "./MoveEditPassword";
 
 function InfoList() {
 
   const navigate = useNavigate();
 
   const handleEditPassword = () => {
-    navigate('/editpassword');
+    navigate('password');
   }
 
   return (
@@ -17,7 +17,7 @@ function InfoList() {
         category='생년월일'
         information='1997.12.04'
       />
-      <EditPassword
+      <MoveEditPassword
         category='비밀번호 변경'
         onButtonClick={handleEditPassword}
       />

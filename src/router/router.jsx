@@ -22,8 +22,8 @@ import Home from '../pages/home/Home';
 import Curriculum from '../pages/curriculum/Curriculum';
 import Success from '@/pages/qr/Success';
 import Info from '../pages/info/Info';
-import EditPassword from '../components/Info/EditPassword';
 import EditInfo from '../pages/info/EditInfo';
+import EditPassword from '../pages/info/EditPassword';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
