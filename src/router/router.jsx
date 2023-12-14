@@ -1,32 +1,36 @@
-import {
-  createBrowserRouter,
-  Route,
-  createRoutesFromElements,
-} from 'react-router-dom';
-import Layout from '@/layout/Layout';
-import Login from '@/pages/login/Login';
-import QR from '@/pages/qr/QR';
-import Attendance from '@/pages/attendance/Attendance';
-import Menu from '@/pages/menu/Menu';
-import Notice from '@/pages/notice/Notice';
-import NoticeDetail from '@/pages/notice/NoticeDetail';
-import Leave from '@/pages/leave/Leave';
-import Note from '@/pages/note/Note';
-import NoteReceive from '@/pages/note/NoteReceive';
-import NoteEditor from '@/pages/note/NoteEditor';
-import Location from '@/pages/qr/Location';
-import Auth from '@/pages/qr/Auth';
-import SignUp from '@/pages/signup/SignUp';
-import Password from '@/pages/signup/Password';
-import Home from '@/pages/home/Home';
-import Curriculum from '@/pages/curriculum/Curriculum';
-import Success from '@/pages/qr/Success';
-import NavigationGuard from '@/components/common/NavigationGuard';
+import { createBrowserRouter, Route, createRoutesFromElements } from "react-router-dom";
+import Layout from "@/layout/Layout";
+import Login from "@/pages/login/Login";
+import QR from "@/pages/qr/QR";
+import Attendance from "@/pages/attendance/Attendance";
+import Menu from "@/pages/menu/Menu";
+import Notice from "@/pages/notice/Notice";
+import NoticeDetail from "@/pages/notice/NoticeDetail";
+import Leave from "@/pages/leave/Leave";
+import Note from "@/pages/note/Note";
+import NoteReceive from "@/pages/note/NoteReceive";
+import NoteEditor from "@/pages/note/NoteEditor";
+import Location from "@/pages/qr/Location";
+import Auth from "@/pages/qr/Auth";
+import SignUp from "@/pages/signup/SignUp";
+import Password from "@/pages/signup/Password";
+import Home from "@/pages/home/Home";
+import Curriculum from "@/pages/curriculum/Curriculum";
+import Success from "@/pages/qr/Success";
+import Info from "../pages/info/Info";
+import EditInfo from "../pages/info/EditInfo";
+import EditPassword from "../pages/info/EditPassword";
+import NavigationGuard from "@/components/common/NavigationGuard";
+import NoteSend from "@/pages/note/NoteSend";
+import NoteTrash from "@/pages/note/NoteTrash";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route path='/' element={<Layout />}>
+      <Route path="/" element={<Layout />}>
+        <Route path="/info" element={<Info />} />
+        <Route path="/info/edit" element={<EditInfo />} />
+        <Route path="/info/password" element={<EditPassword />} />
         <Route
           index
           element={
@@ -36,7 +40,7 @@ export const router = createBrowserRouter(
           }
         />
         <Route
-          path='/qr'
+          path="/qr"
           element={
             <NavigationGuard>
               <QR />
@@ -44,7 +48,7 @@ export const router = createBrowserRouter(
           }
         />
         <Route
-          path='/qr/success'
+          path="/qr/success"
           element={
             <NavigationGuard>
               <Success />
@@ -52,7 +56,7 @@ export const router = createBrowserRouter(
           }
         />
         <Route
-          path='/qr/location'
+          path="/qr/location"
           element={
             <NavigationGuard>
               <Location />
@@ -60,7 +64,7 @@ export const router = createBrowserRouter(
           }
         />
         <Route
-          path='/qr/auth'
+          path="/qr/auth"
           element={
             <NavigationGuard>
               <Auth />
@@ -68,7 +72,7 @@ export const router = createBrowserRouter(
           }
         />
         <Route
-          path='/attendance'
+          path="/attendance"
           element={
             <NavigationGuard>
               <Attendance />
@@ -76,7 +80,7 @@ export const router = createBrowserRouter(
           }
         />
         <Route
-          path='/menu'
+          path="/menu"
           element={
             <NavigationGuard>
               <Menu />
@@ -84,7 +88,7 @@ export const router = createBrowserRouter(
           }
         />
         <Route
-          path='/notice'
+          path="/notice"
           element={
             <NavigationGuard>
               <Notice />
@@ -92,7 +96,7 @@ export const router = createBrowserRouter(
           }
         />
         <Route
-          path='/notice/:id'
+          path="/notice/:id"
           element={
             <NavigationGuard>
               <NoticeDetail />
@@ -100,7 +104,7 @@ export const router = createBrowserRouter(
           }
         />
         <Route
-          path='/leave'
+          path="/leave"
           element={
             <NavigationGuard>
               <Leave />
@@ -108,7 +112,7 @@ export const router = createBrowserRouter(
           }
         />
         <Route
-          path='/note'
+          path="/note"
           element={
             <NavigationGuard>
               <Note />
@@ -116,7 +120,7 @@ export const router = createBrowserRouter(
           }
         />
         <Route
-          path='/note/receive'
+          path="/note/receive"
           element={
             <NavigationGuard>
               <NoteReceive />
@@ -124,7 +128,7 @@ export const router = createBrowserRouter(
           }
         />
         <Route
-          path='/note/editor'
+          path="/note/editor"
           element={
             <NavigationGuard>
               <NoteEditor />
@@ -132,29 +136,38 @@ export const router = createBrowserRouter(
           }
         />
         <Route
-          path='/curriculum'
+          path="/curriculum"
           element={
             <NavigationGuard>
               <Curriculum />
             </NavigationGuard>
           }
         />
-      </Route>
-      <Route path='/login'>
-        <Route index element={<Login />} />
-      </Route>
-      <Route path='/signup/auth'>
-        <Route index element={<SignUp />} />
-      </Route>
-      <Route path='/signup/password'>
         <Route
-          index
+          path="/note/send"
           element={
             <NavigationGuard>
-              <Password />
+              <NoteSend />
             </NavigationGuard>
           }
         />
+        <Route
+          path="/note/trash"
+          element={
+            <NavigationGuard>
+              <NoteTrash />
+            </NavigationGuard>
+          }
+        />
+      </Route>
+      <Route path="/login">
+        <Route index element={<Login />} />
+      </Route>
+      <Route path="/signup/auth">
+        <Route index element={<SignUp />} />
+      </Route>
+      <Route path="/signup/password">
+        <Route index element={<Password />} />
       </Route>
     </>
   )
