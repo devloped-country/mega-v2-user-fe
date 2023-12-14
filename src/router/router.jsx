@@ -145,7 +145,6 @@ export const router = createBrowserRouter(
           }
         />
         <Route
-          feature/userInfo
           path='/info'
           element={
           <NavigationGuard>
@@ -165,7 +164,8 @@ export const router = createBrowserRouter(
           <NavigationGuard>
             <EditPassword />
           </NavigationGuard>}
-
+        />
+        <Route
           path="/note/send"
           element={
             <NavigationGuard>
