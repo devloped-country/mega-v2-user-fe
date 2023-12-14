@@ -3,6 +3,7 @@ import NoteItem from "./NoteItem";
 import NoteModal from "./NoteModal";
 import styles from "./NoteList.module.css";
 import { useFetch } from "@/hooks/useFetch";
+import axios from "axios";
 
 function NoteSendList() {
   const [isShowingModal, setIsShowingModal] = useState(false);
@@ -39,15 +40,9 @@ function NoteSendList() {
   return (
     <section className={styles.wrapper}>
       <ul className={styles.noteList}>
-        {data.map(({ id, title, content, time }) => {
-          <NoteItem key={id} title={title} desc={content} date={time} onClick={() => handleClickList(id)} />;
+        {data.data.map(({ id, title, content, time }) => {
+          return <NoteItem key={id} title={title} desc={content} date={time} isRead={true} onClick={() => handleClickList(id)} />;
         })}
-        {/* <NoteItem
-          title="김예진 매니저님"
-          desc="안녕하세요, 훈련수당은 20일 기준 적용안녕하세요, 훈련수당은 20일 기준 적용안녕하세요, 훈련수당은 20일 기준 적용안녕하세요, 훈련수당은 20일 기준 적용안녕하세요, 훈련수당은 20일 기준 적용"
-          date="2023-10-26"
-          onClick={() => handleClickList(1)}
-        /> */}
       </ul>
       {isShowingModal && <NoteModal handleClose={handleClose} id={id} />}
       <img src={`${import.meta.env.VITE_CLOUD_FRONT_ID}/Frame 565.svg`} alt="메일 삭제" className={styles.button} />
