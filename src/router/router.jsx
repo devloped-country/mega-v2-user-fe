@@ -24,6 +24,7 @@ import NavigationGuard from "@/components/common/NavigationGuard";
 import NoteSend from "@/pages/note/NoteSend";
 import NoteTrash from "@/pages/note/NoteTrash";
 
+
 export const router = createBrowserRouter(
   createRoutesFromElements(
     <>
@@ -144,6 +145,27 @@ export const router = createBrowserRouter(
           }
         />
         <Route
+          feature/userInfo
+          path='/info'
+          element={
+          <NavigationGuard>
+            <Info />
+          </NavigationGuard>}
+        />
+        <Route
+          path='/info/edit'
+          element={
+          <NavigationGuard>
+            <EditInfo />
+          </NavigationGuard>}
+        />
+        <Route
+          path='/info/password'
+          element={
+          <NavigationGuard>
+            <EditPassword />
+          </NavigationGuard>}
+
           path="/note/send"
           element={
             <NavigationGuard>
@@ -158,6 +180,7 @@ export const router = createBrowserRouter(
               <NoteTrash />
             </NavigationGuard>
           }
+
         />
       </Route>
       <Route path="/login">
