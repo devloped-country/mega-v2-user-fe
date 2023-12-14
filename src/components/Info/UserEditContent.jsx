@@ -1,6 +1,6 @@
 import styles from "./UserEditContent.module.css";
 
-function UserEditContent({category, information}) {
+function UserEditContent({category, information, setEditInfo}) {
 
   return (
     <div>
@@ -8,6 +8,7 @@ function UserEditContent({category, information}) {
         <p>{category}</p>
         <input className={styles.color}
           placeholder={information}
+          onChange={(e) => setEditInfo(e.target.value)}
         />
       </div>
     </div>
