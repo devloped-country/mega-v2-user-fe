@@ -3,7 +3,7 @@ import styles from "./InfoList.module.css";
 import { useNavigate } from "react-router-dom";
 import MoveEditPassword from "./MoveEditPassword";
 
-function InfoList() {
+function InfoList({ id, institution, email, phone }) {
 
   const navigate = useNavigate();
 
@@ -14,8 +14,8 @@ function InfoList() {
   return (
     <div className={styles.wrapper}>
       <UserContent
-        category='생년월일'
-        information='1997.12.04'
+        category='교육기관'
+        information={institution}
       />
       <MoveEditPassword
         category='비밀번호 변경'
@@ -23,11 +23,11 @@ function InfoList() {
       />
       <UserContent
         category='이메일'
-        information='kub1234@naver.com'
+        information={email}
       />
       <UserContent
         category='전화번호'
-        information='01012345678'
+        information={phone}
       />
       <UserContent
         category='주소'

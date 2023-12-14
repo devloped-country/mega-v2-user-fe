@@ -14,4 +14,11 @@
   border: none;
   text-align: right;
   color: var(--color-gray-300);
+
+  outline: none;
+  padding-left: 1rem;
+}
+
+.color::-webkit-input-placeholder {
+  color: var(--color-gray-300);
 }
