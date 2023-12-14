@@ -26,6 +26,7 @@ import EditInfo from '../pages/info/EditInfo';
 import EditPassword from '../pages/info/EditPassword';
 import NavigationGuard from '@/components/common/NavigationGuard';
 
+
 export const router = createBrowserRouter(
   createRoutesFromElements(
     <>
@@ -144,6 +145,27 @@ export const router = createBrowserRouter(
               <Curriculum />
             </NavigationGuard>
           }
+        />
+        <Route
+          path='/info'
+          element={
+          <NavigationGuard>
+            <Info />
+          </NavigationGuard>}
+        />
+        <Route
+          path='/info/edit'
+          element={
+          <NavigationGuard>
+            <EditInfo />
+          </NavigationGuard>}
+        />
+        <Route
+          path='/info/password'
+          element={
+          <NavigationGuard>
+            <EditPassword />
+          </NavigationGuard>}
         />
       </Route>
       <Route path='/login'>

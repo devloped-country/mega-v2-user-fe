@@ -1,7 +1,7 @@
 import styles from './MenuHeader.module.css';
 
-function MenuHeader({onButtonAction}) {
 
+function MenuHeader({ onButtonAction }) {
   return (
     <section className={styles.wrapper}>
       <button onClick={onButtonAction} className={styles.intoUserInfo}>
