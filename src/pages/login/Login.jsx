@@ -20,7 +20,9 @@ function Login() {
       await axios({ url: '/api/auth/login', method: 'post', data: param }),
     {
       onSuccess: (data) => {
-        console.log(data);
+        localStorage.setItem('courseId', data.data.courseId);
+        localStorage.setItem('email', data.data.email);
+        localStorage.setItem('token', data.data.token);
         navigate('/', { state: { email: authInfo.email } });
       },
       onerror: () => {

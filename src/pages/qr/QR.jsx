@@ -4,7 +4,6 @@ import { useSQS } from '@/hooks/useSQS';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useGeoLocation } from '@/hooks/useGeoLocation';
-import { QrScanner } from '@yudiel/react-qr-scanner';
 
 function QR() {
   const { mutater: sqsMutate } = useSQS();
@@ -17,19 +16,27 @@ function QR() {
       const { data } = await axios({
         url: '/api/user',
         method: 'post',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
         data: {
-          email: 'john2.doe@example.com',
+          email: localStorage.getItem('email'),
           latitude: location.latitude,
           longitude: location.longitude,
         },
       });
 
-      // if (data) {
-      //   navigate('/qr/location');
-      //   return;
-      // }
+      if (data) {
+        navigate('/qr/location');
+        return;
+      }
 
-      const res = await axios(`/api/qr/${qr}`);
+      const res = await axios({
+        url: `/api/qr/${qr}/${localStorage.getItem('courseId')}`,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
 
       if (res.data.responseCode === -1) {
         navigate('/qr/auth');
@@ -37,7 +44,7 @@ function QR() {
       }
 
       try {
-        await sqsMutate(qr, 'john2.doe@example.com');
+        await sqsMutate(qr, localStorage.getItem('email'));
         navigate('/qr/success');
       } catch (e) {
         navigate('/qr/auth');
@@ -47,11 +54,6 @@ function QR() {
 
   return (
     <section className={styles.qrWrapper}>
-      {/* <QrScanner
-        onDecode={handleResult}
-        className={styles.qr}
-        containerStyle={{ width: '100%', height: '100%' }}
-      /> */}
       <QrReader
         delay={1000}
         onScan={handleResult}
