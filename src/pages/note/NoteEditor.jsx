@@ -22,6 +22,11 @@ function NoteEditor() {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
+        data: {
+          to: [location.state.receiverId],
+          title: title,
+          content: content,
+        },
       }),
     {
       onSuccess: () => {

@@ -3,11 +3,13 @@ import NoteItem from "./NoteItem";
 import NoteModal from "./NoteModal";
 import styles from "./NoteList.module.css";
 import { useFetch } from "@/hooks/useFetch";
+import axios from "axios";
 
 function NoteSendList() {
   const [isShowingModal, setIsShowingModal] = useState(false);
   // const [id, setId] = useState("");
   const [selectedNoteIds, setSelectedNoteIds] = useState([]);
+
   const { data, isLoading } = useFetch(
     [],
     async () =>
@@ -36,22 +38,6 @@ function NoteSendList() {
     });
   };
 
-  const handleDeleteSelectedNotes = useFetch([], async () => {
-    try {
-      const response = await axios.post("/api/note/real_delete_received", {
-        noteIds: selectedNoteIds,
-      });
-
-      if (response.status === 200) {
-        setSelectedNoteIds([]);
-      } else {
-        console.error("Failed to delete notes:", response.statusText);
-      }
-    } catch (error) {
-      console.error("Error while deleting notes:", error);
-    }
-  });
-
   const handleClose = () => {
     setIsShowingModal(false);
   };
@@ -59,8 +45,8 @@ function NoteSendList() {
   return (
     <section className={styles.wrapper}>
       <ul className={styles.noteList}>
-        {data.map(({ id, title, content, time }) => {
-          <NoteItem key={id} title={title} desc={content} date={time} isSelected={selectedNoteIds.includes(id)} onClick={() => handleClickList(id)} />;
+        {data.data.map(({ id, title, content, time }) => {
+          return <NoteItem key={id} title={title} desc={content} date={time} isRead={true} isSelected={selectedNoteIds.includes(id)} onClick={() => handleClickList(id)} />;
         })}
         {/* <NoteItem
           title="김예진 매니저님"
@@ -70,7 +56,7 @@ function NoteSendList() {
         /> */}
       </ul>
       {isShowingModal && <NoteModal handleClose={handleClose} id={id} />}
-      <img src={`${import.meta.env.VITE_CLOUD_FRONT_ID}/Frame 565.svg`} alt="메일 삭제" className={styles.button} onClick={handleDeleteSelectedNotes} />
+      <img src={`${import.meta.env.VITE_CLOUD_FRONT_ID}/Frame 565.svg`} alt="메일 삭제" className={styles.button} />
     </section>
   );
 }
