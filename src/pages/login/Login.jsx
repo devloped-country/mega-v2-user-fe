@@ -14,20 +14,25 @@ function Login() {
   });
   const navigate = useNavigate();
 
-  const { mutate } = useMutation(async (param) => await axios({ url: "/api/auth/login", method: "post", data: param }), {
-    onSuccess: ({ data }) => {
-      if (data.token) {
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("id", data.id);
-        navigate("/", { state: { email: authInfo.email } });
-      } else {
-        navigate("/signup/auth");
-      }
-    },
-    onerror: () => {
-      setIsShowingValidateMessage(true);
-    },
-  });
+  const { mutate } = useMutation(
+    async (param) =>
+      await axios({ url: '/api/auth/login', method: 'post', data: param }),
+    {
+      onSuccess: (data) => {
+        if(data.data.token) {
+        localStorage.setItem('courseId', data.data.courseId);
+        localStorage.setItem('email', data.data.email);
+        localStorage.setItem('token', data.data.token);
+        navigate('/', { state: { email: authInfo.email } });
+        } else {
+          navigate("/signup/auth");
+        }
+      },
+      onerror: () => {
+        setIsShowingValidateMessage(true);
+      },
+    }
+  );
 
   const onClickLogin = () => {
     mutate({
