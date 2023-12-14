@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import MenuHeader from './MenuHeader';
 import MenuList from './MenuList';
-import { useNavigate } from 'react-router-dom';
 
 function MenuContent() {
   const navigate = useNavigate();
