@@ -1,10 +1,9 @@
-import styles from './MenuHeader.module.css';
+import styles from './UserInfoHeader.module.css';
 
-function MenuHeader({onButtonAction, id, name, course}) {
+function UserInfoHeader({id, name, course}) {
 
   return (
     <section className={styles.wrapper}>
-      <button onClick={onButtonAction} className={styles.intoUserInfo}>
         <img
           className={styles.profile}
           src={`${import.meta.env.VITE_CLOUD_FRONT_ID}/User-56.svg`}
@@ -14,9 +13,9 @@ function MenuHeader({onButtonAction, id, name, course}) {
         <p className={styles.course}>
           {course}
         </p>
-      </button>
+        
     </section>
   );
 }
 
-export default MenuHeader;
+export default UserInfoHeader;

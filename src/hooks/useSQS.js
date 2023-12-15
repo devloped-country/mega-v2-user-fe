@@ -1,5 +1,4 @@
 import { SQSClient, SendMessageCommand } from '@aws-sdk/client-sqs';
-import { v4 as uuid } from 'uuid';
 
 const client = new SQSClient({
   region: 'ap-northeast-3',

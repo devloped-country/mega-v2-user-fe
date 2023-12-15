@@ -1,0 +1,9 @@
+.backColor {
+  background-color: var(--color-gray-400);
+}
+
+.editButton {
+  position: absolute;
+  right: 25px;
+  top: 105px;
+}

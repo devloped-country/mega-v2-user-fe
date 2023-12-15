@@ -1,0 +1,24 @@
+.align {
+  width: 90%;
+  height: 50px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+
+  justify-content: space-between;
+}
+
+.color {
+  font-size: 1.6rem;
+  border: none;
+  text-align: right;
+  color: var(--color-gray-300);
+
+  outline: none;
+  padding-left: 1rem;
+}
+
+.color::-webkit-input-placeholder {
+  color: var(--color-gray-300);
+}
