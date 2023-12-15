@@ -16,3 +16,19 @@
 
   justify-content: space-around;
 }
+
+.cancelButton {
+  border-radius: 10px;
+  padding: 16px 40px;
+  font-size: 1.8rem;
+  background-color: var(--color-white);
+  color: var(--color-black);
+  border: none;
+  cursor: pointer;
+}
+
+.validateMessage {
+  font-size: 1rem;
+  padding-left: 50px;
+  color: var(--color-red-100);
+}
