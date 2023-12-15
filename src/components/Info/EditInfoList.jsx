@@ -10,19 +10,27 @@ import { useState } from "react";
 
 function EditInfoList({id, name, insitution, email, phone}) {
 
-  const navigate = useNavigate();
+  const [editInfo, setEditInfo] = useState({
+    eidtName: "",
+    editPhone: ""
+  });
 
-  const [editName, setEditName] = useState('');
-  const [editPhone, setEditPhone] = useState('');
+  const navigate = useNavigate();
+  
 
   const onEditButtonAction = () => {
-    console.log({editName, editPhone});
+    console.log({name, phone})
     mutate({
-      editName,
-      editPhone
-    })
+      name: editInfo.eidtName,
+      phone: editInfo.editPhone
+    });
+    
+  };
+
+  const onCancelEditInfo = () => {
     navigate('/info');
   }
+
 
   const { mutate } = useMutation(
     async (param) =>
@@ -31,7 +39,7 @@ function EditInfoList({id, name, insitution, email, phone}) {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
-      method: 'post',
+      method: 'put',
       data: param,
     })
   )
@@ -45,8 +53,8 @@ function EditInfoList({id, name, insitution, email, phone}) {
       <UserEditContent
         category='이름'
         information={name}
-        value={editName}
-        setEditInfo={setEditName}
+        value={editInfo.eidtName}
+        setEditInfo={(value) => setEditInfo(prev => ({...prev, name: value}))}
       />
       <UserContent
         category='이메일'
@@ -55,11 +63,11 @@ function EditInfoList({id, name, insitution, email, phone}) {
       <UserEditContent
         category='전화번호'
         information={phone}
-        value={editPhone}
-        setEditInfo={setEditPhone}
+        value={editInfo.editPhone}
+        setEditInfo={(value) => setEditInfo(prev => ({...prev, phone: value}))}
       />
       <div className={styles.align}>
-        <p>취소</p>
+      <button onClick={onCancelEditInfo} className={styles.cancelButton}>취소</button>
         <ModalButton type='mutated' onAction={onEditButtonAction} text='저장'/>
       </div>
     </div>

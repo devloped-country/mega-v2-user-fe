@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styles from "./InputPassword.module.css";
 
 function InputPassword({ title, value, setEditPassword }) {
