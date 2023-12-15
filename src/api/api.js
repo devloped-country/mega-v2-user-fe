@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const api = axios.create({
-  baseURL: 'https://some-domain.com/api/',
+  baseURL: 'https://user.mzc-appmega.click/api/',
 });
 
 api.interceptors.response.use(
