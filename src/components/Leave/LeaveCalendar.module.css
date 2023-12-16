@@ -25,3 +25,9 @@
   flex-direction: column;
   gap: 16px;
 }
+
+.active {
+  background-color: #f0e8fc;
+  color: #5e4778;
+  border-radius: 10px;
+}

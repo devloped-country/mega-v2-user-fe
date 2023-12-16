@@ -17,7 +17,7 @@ function NoteEditor() {
   const { mutate } = useMutation(
     async () =>
       await axios({
-        url: 'https://user.mzc-appmega.click/api/note/register',
+        url: '/api/note/register',
         method: 'post',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,

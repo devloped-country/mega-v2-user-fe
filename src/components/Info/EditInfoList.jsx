@@ -30,7 +30,7 @@ function EditInfoList({ id, name, insitution, email, phone }) {
   const { mutate } = useMutation(
     async (param) =>
       await axios({
-        url: 'https://user.mzc-appmega.click/api/user/update',
+        url: '/api/user/update',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },

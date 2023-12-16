@@ -1,5 +1,5 @@
 .wrapper {
-  padding: 24px;
+  padding: 12px 24px;
 }
 
 .tags {
@@ -20,6 +20,8 @@
 }
 
 .createdInfo {
+  display: flex;
+  gap: 12px;
   padding: 16px 0;
 }
 
@@ -57,4 +59,14 @@
 
 .tags {
   margin-top: 8px;
+}
+
+.noticeItem {
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--color-gray-300);
+}
+
+.noticeItem:last-child {
+  padding-bottom: 0px;
+  border: none;
 }

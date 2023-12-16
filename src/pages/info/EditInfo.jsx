@@ -9,7 +9,7 @@ function EditInfo() {
     [],
     async () =>
       await axios({
-        url: `https://user.mzc-appmega.click/api/user/read`,
+        url: `/api/user/read`,
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
