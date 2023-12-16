@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { api } from '@/api/api';
+import { api } from '@https://user.mzc-appmega.click/apihttps://user.mzc-appmega.click/api';
 
 const initOptions = {
   onSuccess: (data) => {},

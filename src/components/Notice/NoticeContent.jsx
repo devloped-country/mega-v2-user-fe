@@ -7,7 +7,7 @@ function NoticeContent() {
   const navigate = useNavigate();
   const { data: notices, isLoading } = useFetch(
     [],
-    async () => await axios('/api/notice')
+    async () => await axios('https://user.mzc-appmega.click/api/notice')
   );
 
   if (isLoading) {

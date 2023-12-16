@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import NoteItem from "./NoteItem";
-import NoteModal from "./NoteModal";
-import styles from "./NoteList.module.css";
-import { useFetch } from "@/hooks/useFetch";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import NoteItem from './NoteItem';
+import NoteModal from './NoteModal';
+import styles from './NoteList.module.css';
+import { useFetch } from '@/hooks/useFetch';
+import axios from 'axios';
 
 function NoteSendList() {
   const [isShowingModal, setIsShowingModal] = useState(false);
@@ -13,9 +13,9 @@ function NoteSendList() {
     [],
     async () =>
       await axios({
-        url: "/api/note/sent",
+        url: 'https://user.mzc-appmega.click/api/note/sent',
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
       })
   );
@@ -41,11 +41,24 @@ function NoteSendList() {
     <section className={styles.wrapper}>
       <ul className={styles.noteList}>
         {data.data.map(({ id, title, content, time }) => {
-          return <NoteItem key={id} title={title} desc={content} date={time} isRead={true} onClick={() => handleClickList(id)} />;
+          return (
+            <NoteItem
+              key={id}
+              title={title}
+              desc={content}
+              date={time}
+              isRead={true}
+              onClick={() => handleClickList(id)}
+            />
+          );
         })}
       </ul>
       {isShowingModal && <NoteModal handleClose={handleClose} id={id} />}
-      <img src={`${import.meta.env.VITE_CLOUD_FRONT_ID}/Frame 565.svg`} alt="메일 삭제" className={styles.button} />
+      <img
+        src={`${import.meta.env.VITE_CLOUD_FRONT_ID}/Frame 565.svg`}
+        alt='메일 삭제'
+        className={styles.button}
+      />
     </section>
   );
 }
