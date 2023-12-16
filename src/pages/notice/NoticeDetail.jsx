@@ -7,13 +7,19 @@ function NoticeDetail() {
   const { id } = useParams();
   const { data: notice, isLoading } = useFetch(
     [],
-    async () => await axios(`https://user.mzc-appmega.click/api/notice/${id}`)
+    async () =>
+      await axios({
+        url: `/api/notice/${id}`,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      })
   );
 
   if (isLoading) {
     return <div>로딩중..</div>;
   }
-
+  console.log(notice);
   const mapedTags = notice.data.data.tags.map(({ id, tag }) => (
     <span key={id} className={styles.tag}>
       {tag}
@@ -30,13 +36,9 @@ function NoticeDetail() {
           }-${new Date(notice.data.data.createdTime).getDate()}`}
         </p>
       </div>
-      <img src={notice.data.data.thumbnail} alt={notice.data.data.title} />
       <div className={styles.noticeInfo}>
         <h3 className={styles.title}>{notice.data.data.title}</h3>
-        <p className={styles.content}>
-          {notice.data.data.textContent}
-          안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.
-        </p>
+        <p className={styles.content}>{notice.data.data.textContent}</p>
         <div className={styles.tags}>{mapedTags}</div>
       </div>
     </div>

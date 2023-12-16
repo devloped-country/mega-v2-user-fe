@@ -3,6 +3,7 @@ import MenuHeader from './MenuHeader';
 import MenuList from './MenuList';
 import { useFetch } from '@/hooks/useFetch';
 import axios from 'axios';
+import ContentLoading from '../common/ContentLoading';
 
 function MenuContent() {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ function MenuContent() {
     [],
     async () =>
       await axios({
-        url: `https://user.mzc-appmega.click/api/user/read`,
+        url: `/api/user/read`,
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
@@ -23,7 +24,7 @@ function MenuContent() {
   );
 
   if (isLoading) {
-    return;
+    return <ContentLoading />;
   }
 
   return (

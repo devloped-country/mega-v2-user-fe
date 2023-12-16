@@ -2,6 +2,10 @@ import styles from './MenuList.module.css';
 import MenuItem from './MenuItem';
 
 function MenuList() {
+  const onAction = () => {
+    localStorage.clear();
+  };
+
   return (
     <ul className={styles.wrapper}>
       <MenuItem
@@ -27,6 +31,8 @@ function MenuList() {
       <MenuItem
         img={`https://d2f3kqq80r3o3g.cloudfront.net/free-icon-font-sign-out-alt-5528120 1.svg`}
         text='로그아웃'
+        to='/login'
+        onAction={onAction}
       />
     </ul>
   );

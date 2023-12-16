@@ -14,7 +14,7 @@ function QR() {
     if (result) {
       const [_, qr] = result.split('/');
       const { data } = await axios({
-        url: 'https://user.mzc-appmega.click/api/user',
+        url: '/api/user',
         method: 'post',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -32,9 +32,7 @@ function QR() {
       }
 
       const res = await axios({
-        url: `https://user.mzc-appmega.click/api/qr/${qr}/${localStorage.getItem(
-          'courseId'
-        )}`,
+        url: `/api/qr/${qr}/${localStorage.getItem('courseId')}`,
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
