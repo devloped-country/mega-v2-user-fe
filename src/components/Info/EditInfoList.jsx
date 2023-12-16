@@ -13,26 +13,19 @@ function EditInfoList({ id, name, insitution, email, phone }) {
     editPhone: '',
   });
 
-  const [editInfo, setEditInfo] = useState({
-    eidtName: "",
-    editPhone: ""
-  });
-
   const navigate = useNavigate();
-  
 
   const onEditButtonAction = () => {
-    console.log({name, phone})
+    console.log({ name, phone });
     mutate({
       name: editInfo.eidtName,
-      phone: editInfo.editPhone
+      phone: editInfo.editPhone,
     });
   };
 
   const onCancelEditInfo = () => {
     navigate('/info');
   };
-
 
   const { mutate } = useMutation(
     async (param) =>
