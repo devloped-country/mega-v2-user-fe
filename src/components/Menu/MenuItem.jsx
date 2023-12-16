@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import styles from './MenuItem.module.css';
 
-function MenuItem({ img, text, to }) {
+function MenuItem({ img, text, to, onAction }) {
   return (
     <li className={styles.wrapper}>
-      <Link to={to} className={styles.link}>
+      <Link to={to} className={styles.link} onClick={onAction}>
         <div className={styles.left}>
           <img src={img} alt={text} />
           <h4 className={styles.title}>{text}</h4>

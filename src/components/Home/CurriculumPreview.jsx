@@ -1,12 +1,11 @@
 import styles from './CurriculumPreview.module.css';
 
-function CurriculumPreview({subject, time, startDate, endDate, children}) {
-
+function CurriculumPreview({ subject, time, startDate, endDate, children }) {
   const start = new Date(startDate);
   const end = new Date(endDate);
   const curDate = Date.now();
 
-  return(
+  return (
     <div className={styles.wrapper}>
       <div>
         <div className={styles.textAlign}>
@@ -24,10 +23,9 @@ function CurriculumPreview({subject, time, startDate, endDate, children}) {
           </li>
         </ul>
       </div>
-      
+
       {children}
     </div>
-    
   );
 }
 

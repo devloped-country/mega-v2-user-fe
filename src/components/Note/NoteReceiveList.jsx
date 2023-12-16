@@ -16,7 +16,7 @@ function NoteReceiveList() {
     [],
     async () =>
       await axios({
-        url: 'https://user.mzc-appmega.click/api/note/received',
+        url: '/api/note/received',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
@@ -29,12 +29,9 @@ function NoteReceiveList() {
 
   const handleDeleteSelectedNotes = async () => {
     try {
-      const response = await axios.post(
-        'https://user.mzc-appmega.click/api/note/delete_received',
-        {
-          noteIds: selectedNoteIds,
-        }
-      );
+      const response = await axios.post('/api/note/delete_received', {
+        noteIds: selectedNoteIds,
+      });
 
       if (response.status === 200) {
         setSelectedNoteIds([]);

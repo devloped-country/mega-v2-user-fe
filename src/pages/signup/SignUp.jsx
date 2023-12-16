@@ -16,7 +16,7 @@ function SignUp() {
   const { mutate } = useMutation(
     async (param) =>
       await axios({
-        url: 'https://user.mzc-appmega.click/api/auth/identify/check',
+        url: '/api/auth/identify/check',
         method: 'post',
         data: param,
       }),
@@ -37,7 +37,7 @@ function SignUp() {
   const { mutate: authMutate } = useMutation(
     async (param) =>
       await axios({
-        url: 'https://user.mzc-appmega.click/api/auth/identify/certificate',
+        url: '/api/auth/identify/certificate',
         method: 'post',
         data: param,
       }),
