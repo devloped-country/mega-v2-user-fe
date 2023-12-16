@@ -14,7 +14,7 @@ function Password() {
   const { mutate } = useMutation(
     async (param) =>
       await axios({
-        url: '/api/auth/reset_password',
+        url: 'https://user.mzc-appmega.click/api/auth/reset_password',
         method: 'put',
         data: param,
       }),

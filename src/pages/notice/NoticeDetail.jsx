@@ -7,7 +7,7 @@ function NoticeDetail() {
   const { id } = useParams();
   const { data: notice, isLoading } = useFetch(
     [],
-    async () => await axios(`/api/notice/${id}`)
+    async () => await axios(`https://user.mzc-appmega.click/api/notice/${id}`)
   );
 
   if (isLoading) {

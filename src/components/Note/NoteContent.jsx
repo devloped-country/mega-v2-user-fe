@@ -12,7 +12,7 @@ function NoteContent() {
     [],
     async () =>
       await axios({
-        url: "/api/note/receivers",
+        url: "https://user.mzc-appmega.click/api/note/receivers",
         method: "get",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -21,7 +21,7 @@ function NoteContent() {
   );
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return;
   }
   console.log("불러온정보" + data);
 
@@ -34,28 +34,30 @@ function NoteContent() {
     setIsShowingReceiverModal(false);
   };
 
-  const receiverList = data && data.data ? data.data.map(({ id, email, name }) => (
-    <li
-      key={id}
-      className={styles.receiverItem}
-      onClick={() =>
-        navigate("/note/editor", {
-          state: {
-            receiver: name + " 매니저님",
-            receiverId: id,
-          },
-        })
-      }
-    >
-           <img
-        src="https://mblogthumb-phinf.pstatic.net/MjAyMTEyMzFfMTYw/MDAxNjQwOTMyNjEyMjU4.0CtqFXmwxPTP73-1814Z6CqNeDsuWKCWOptcbDqvFj0g.pW71_YTc7CpVvwZ4_6bbfzp8YvK4WnfiKecXYl4zlBEg.PNG.moonskinz/%EB%AC%B8%EB%94%94%EC%9E%90%EC%9D%B8_%EB%94%94%EC%8A%A4%EC%BD%94%EB%93%9C_%285%29.png?type=w420"
-        alt="프로필"
-        className={styles.profile}
-      />
-      {name} 매니저님
-    </li>
-  )) : [];
-
+  const receiverList =
+    data && data.data
+      ? data.data.map(({ id, email, name }) => (
+          <li
+            key={id}
+            className={styles.receiverItem}
+            onClick={() =>
+              navigate("/note/editor", {
+                state: {
+                  receiver: name + " 매니저님",
+                  receiverId: id,
+                },
+              })
+            }
+          >
+            <img
+              src="https://mblogthumb-phinf.pstatic.net/MjAyMTEyMzFfMTYw/MDAxNjQwOTMyNjEyMjU4.0CtqFXmwxPTP73-1814Z6CqNeDsuWKCWOptcbDqvFj0g.pW71_YTc7CpVvwZ4_6bbfzp8YvK4WnfiKecXYl4zlBEg.PNG.moonskinz/%EB%AC%B8%EB%94%94%EC%9E%90%EC%9D%B8_%EB%94%94%EC%8A%A4%EC%BD%94%EB%93%9C_%285%29.png?type=w420"
+              alt="프로필"
+              className={styles.profile}
+            />
+            {name} 매니저님
+          </li>
+        ))
+      : [];
 
   return (
     <>
