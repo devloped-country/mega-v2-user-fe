@@ -18,7 +18,7 @@ function NoteReceiveList() {
     [],
     async () =>
       await axios({
-        url: "http://localhost:8082/api/note/received",
+        url: "/api/note/received",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -33,7 +33,7 @@ function NoteReceiveList() {
   const handleDeleteSelectedNotes = async () => {
     try {
       const response = await axios({
-        url: "http://localhost:8082/api/note/delete_received",
+        url: "/api/note/delete_received",
         method: "put",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,

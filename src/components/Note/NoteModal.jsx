@@ -12,7 +12,7 @@ function NoteModal({ id, handleClose }) {
     [],
     async () =>
       await axios({
-        url: `http://localhost:8082/api/note/${id}`,
+        url: `/api/note/${id}`,
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

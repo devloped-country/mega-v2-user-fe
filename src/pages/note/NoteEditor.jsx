@@ -17,7 +17,7 @@ function NoteEditor() {
   const { mutate } = useMutation(
     async () =>
       await axios({
-        url: "http://localhost:8082/api/note/register",
+        url: "/api/note/register",
         method: "post",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,

@@ -14,7 +14,7 @@ function NoteSendList() {
     [],
     async () =>
       await axios({
-        url: "http://localhost:8082/api/note/trash",
+        url: "/api/note/trash",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

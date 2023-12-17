@@ -17,7 +17,7 @@ function Login() {
   const { mutate } = useMutation(
     async (param) =>
       await axios({
-        url: "https://user.mzc-appmega.click/api/auth/login",
+        url: "/api/auth/login",
         method: "post",
         data: param,
       }),

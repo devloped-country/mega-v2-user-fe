@@ -1,9 +1,9 @@
-import { useNavigate } from 'react-router-dom';
-import InfoList from '../../components/Info/InfoList';
-import UserInfoHeader from '../../components/Info/UserInfoHeader';
-import styles from './Info.module.css';
-import { useFetch } from '@/hooks/useFetch';
-import axios from 'axios';
+import { useNavigate } from "react-router-dom";
+import InfoList from "../../components/Info/InfoList";
+import UserInfoHeader from "../../components/Info/UserInfoHeader";
+import styles from "./Info.module.css";
+import { useFetch } from "@/hooks/useFetch";
+import axios from "axios";
 
 function Info() {
   const navigator = useNavigate();
@@ -12,9 +12,9 @@ function Info() {
     [],
     async () =>
       await axios({
-        url: `https://user.mzc-appmega.click/api/user/read`,
+        url: `/api/user/read`,
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       })
   );
@@ -24,7 +24,7 @@ function Info() {
   }
 
   const handleEditInfomation = () => {
-    navigator('edit');
+    navigator("edit");
   };
 
   console.log(userInfo);
@@ -47,22 +47,9 @@ function Info() {
 
   return (
     <div className={styles.backColor}>
-      <UserInfoHeader
-        id={userInfo.data.id}
-        name={userInfo.data.name}
-        course={userInfo.data.courseName}
-      />
-      <img
-        src='https://d2f3kqq80r3o3g.cloudfront.net/editUserInfo.svg'
-        className={styles.editButton}
-        onClick={handleEditInfomation}
-      />
-      <InfoList
-        id={userInfo.data.id}
-        institution={userInfo.data.institutionName}
-        email={userInfo.data.email}
-        phone={userInfo.data.phone}
-      />
+      <UserInfoHeader id={userInfo.data.id} name={userInfo.data.name} course={userInfo.data.courseName} />
+      <img src="https://d2f3kqq80r3o3g.cloudfront.net/editUserInfo.svg" className={styles.editButton} onClick={handleEditInfomation} />
+      <InfoList id={userInfo.data.id} institution={userInfo.data.institutionName} email={userInfo.data.email} phone={userInfo.data.phone} />
     </div>
   );
 }
