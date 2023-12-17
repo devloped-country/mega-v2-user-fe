@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import styles from './ApplicationDetails.module.css';
 import Badge from '@components/common/Badge';
 

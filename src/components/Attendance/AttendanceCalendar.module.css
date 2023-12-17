@@ -24,3 +24,43 @@
   padding: 16px;
   text-align: center;
 }
+
+.unAttendance {
+  margin-top: 8px;
+  width: 100%;
+  height: 6px;
+  background-color: var(--color-green-200);
+  border-radius: 10px;
+}
+
+.attendance {
+  margin-top: 8px;
+  width: 100%;
+  height: 6px;
+  background-color: var(--color-green-200);
+  border-radius: 10px;
+}
+
+.late {
+  margin-top: 8px;
+  width: 100%;
+  height: 6px;
+  background-color: var(--color-yellow-200);
+  border-radius: 10px;
+}
+
+.vacation {
+  margin-top: 8px;
+  width: 100%;
+  height: 6px;
+  background-color: var(--color-blue-300);
+  border-radius: 10px;
+}
+
+.leave {
+  margin-top: 8px;
+  width: 100%;
+  height: 6px;
+  background-color: var(--color-red-500);
+  border-radius: 10px;
+}
