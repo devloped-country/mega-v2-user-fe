@@ -1,8 +1,8 @@
 .wrapper {
-  padding: 20px;
+  padding: 24px 12px;
   display: flex;
   justify-content: space-between;
-  width: 390px;
+  width: 100%;
 }
 
 .textAlign {
@@ -12,19 +12,20 @@
 
 .title {
   margin-left: 1rem;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   line-height: 125%;
 }
 
 .timePosition {
   margin-left: 1rem;
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   line-height: 125%;
   color: var(--color-gray-300);
 }
 
 .info {
   margin-top: 8px;
+  font-size: 1.4rem;
   display: flex;
   gap: 8px;
   color: var(--color-gray-300);

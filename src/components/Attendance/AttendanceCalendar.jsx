@@ -1,21 +1,50 @@
 import styles from './AttendanceCalendar.module.css';
 
-function AttendanceCalendar() {
+const getAttendanceStatusTextByStatus = (status) => {
+  if (status === 0) {
+    return <div className={styles.unAttendance} />;
+  } else if (status === 1) {
+    return <div className={styles.attendance} />;
+  } else if (status === 2) {
+    return <div className={styles.late} />;
+  } else if (status === 3) {
+    return <div className={styles.leave} />;
+  }
+
+  return <div className={styles.vacation} />;
+};
+
+function AttendanceCalendar({ sortedAttendance }) {
   const year = new Date().getFullYear();
   const month = new Date().getMonth();
   const currMonthDates = new Date(year, month + 1, 0).getDate();
   const currMonthNullDates = new Date(year, month, 1).getDay();
-
   const dates = Array.from(
     { length: currMonthNullDates + currMonthDates },
-    (_, i) => i + 1 - currMonthNullDates
+    (_, i) => {
+      return { date: i + 1 - currMonthNullDates, status: 0 };
+    }
   );
 
-  const mapedDates = dates.map((date) => (
-    <div className={styles.date} key={date}>
-      {date > 0 && date}
-    </div>
-  ));
+  sortedAttendance.forEach((attendance, index) => {
+    const stringTime = String(attendance.startTime);
+    const regex = /^(\d{4}-\d{2}-\d{2})/;
+
+    const match = stringTime.match(regex);
+
+    const extractedDate = match[1].substring(8);
+    dates[parseInt(extractedDate - 1) + currMonthNullDates].status =
+      attendance.status;
+  });
+
+  const mapedDates = dates.map(({ date, status }, index) => {
+    return (
+      <div className={styles.date} key={date}>
+        {date > 0 && date}
+        {date > 0 && getAttendanceStatusTextByStatus(status)}
+      </div>
+    );
+  });
 
   return (
     <section>

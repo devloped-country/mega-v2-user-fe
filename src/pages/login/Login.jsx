@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 function Login() {
   const [isFocusEmailInput, setIsFocusEmailInput] = useState(false);
   const [isFocusPasswordInput, setIsFocusPasswordInput] = useState(false);
-  const [isShowingValidateMessage, setIsShowingValidateMessage] = useState(true);
+  const [isShowingValidateMessage, setIsShowingValidateMessage] = useState(false);
   const [authInfo, setAuthInfo] = useState({
     email: "",
     password: "",
@@ -33,7 +33,7 @@ function Login() {
           navigate("/signup/auth");
         }
       },
-      onerror: () => {
+      onError: () => {
         setIsShowingValidateMessage(true);
       },
     }
@@ -79,7 +79,7 @@ function Login() {
             로그인
           </button>
         </form>
-        <div className={styles.password}>비밀번호를 잊으셨나요?</div>
+        {/* <div className={styles.password}>비밀번호를 잊으셨나요?</div> */}
       </main>
     </section>
   );
