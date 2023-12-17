@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
 import NoteItem from "./NoteItem";
-import NoteModal from "./NoteModal";
 import styles from "./NoteList.module.css";
 import { useFetch } from "@/hooks/useFetch";
+import { useMutation } from "@/hooks/useMutation";
 import axios from "axios";
+import { useNewSocket } from "@/hooks/useNewSocket";
+import ContentLoading from "@components/common/ContentLoading";
 
-function NoteSendList() {
-  const [isShowingModal, setIsShowingModal] = useState(false);
-  // const [id, setId] = useState("");
-  const [selectedNoteIds, setSelectedNoteIds] = useState([]);
+function NoteTrashList() {
+  const { receivedNotes } = useNewSocket();
+  const [messages, setMessages] = useState([]);
 
-  const { data, isLoading } = useFetch(
+  const { isLoading, refetch } = useFetch(
     [],
     async () =>
       await axios({
@@ -18,47 +19,72 @@ function NoteSendList() {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
-      })
+      }),
+    {
+      onSuccess: ({ data }) => {
+        const mapedData = data.map((data) => ({ ...data, isSelect: false }));
+        setMessages(mapedData);
+      },
+    }
   );
 
+  const { mutate } = useMutation(
+    async (params) =>
+      await axios({
+        url: "/api/note/real_delete_received",
+        method: "put",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        data: params,
+      }),
+    {
+      onSuccess: () => {
+        refetch();
+      },
+    }
+  );
+
+  useEffect(() => {
+    const mapedReceiveNotes = receivedNotes.map((receivedNote) => ({ isSelected: false, note: receivedNote, ...receivedNote }));
+    setMessages(mapedReceiveNotes);
+  }, [receivedNotes]);
+
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <ContentLoading />;
   }
 
-  if (!data || data.length === 0) {
-    return <div>No notes.</div>;
-  }
+  const onChange = (id) => {
+    setMessages((prev) => {
+      return prev.map((message) => {
+        if (id === message.id) {
+          return { ...message, isSelect: !message.isSelect };
+        }
 
-  const handleClickList = (id) => {
-    setIsShowingModal(true);
-    setId(id);
-    setSelectedNoteIds((prevSelectedIds) => {
-      const isSelected = prevSelectedIds.includes(id);
-      return isSelected ? prevSelectedIds.filter((selectedId) => selectedId !== id) : [...prevSelectedIds, id];
+        return message;
+      });
     });
   };
 
-  const handleClose = () => {
-    setIsShowingModal(false);
+  const onDelete = () => {
+    const filterdMessages = messages.filter((message) => message.isSelect).map((message) => message.id);
+    mutate({ selectedNoteId: filterdMessages });
   };
 
   return (
     <section className={styles.wrapper}>
       <ul className={styles.noteList}>
-        {data.data.map(({ id, title, content, time }) => {
-          return <NoteItem key={id} title={note.from} desc={note.title} date={note.time} isRead={true} isSelected={selectedNoteIds.includes(id)} onClick={() => handleClickList(note.id)} />;
-        })}
-        {/* <NoteItem
-          title="김예진 매니저님"
-          desc="안녕하세요, 훈련수당은 20일 기준 적용안녕하세요, 훈련수당은 20일 기준 적용안녕하세요, 훈련수당은 20일 기준 적용안녕하세요, 훈련수당은 20일 기준 적용안녕하세요, 훈련수당은 20일 기준 적용"
-          date="2023-10-26"
-          onClick={() => handleClickList(1)}
-        /> */}
+        {messages ? (
+          messages.map(({ id, title, from, content, time, isRead, isSelect }) => {
+            return <NoteItem key={id} id={id} title={from} desc={title} date={time} isRead={true} isSelect={isSelect} onChange={onChange} />;
+          })
+        ) : (
+          <div className={styles.notMessage}>쪽지가 없습니다.</div>
+        )}
       </ul>
-      {isShowingModal && <NoteModal handleClose={handleClose} id={id} />}
-      <img src={`${import.meta.env.VITE_CLOUD_FRONT_ID}/Frame 565.svg`} alt="메일 삭제" className={styles.button} />
+      <img src={`https://d2f3kqq80r3o3g.cloudfront.net/Frame 565.svg`} alt="메일 삭제" className={styles.button} onClick={onDelete} />
     </section>
   );
 }
 
-export default NoteSendList;
+export default NoteTrashList;

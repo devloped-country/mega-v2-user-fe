@@ -9,16 +9,15 @@ import { useState } from "react";
 
 function EditInfoList({ id, name, insitution, email, phone }) {
   const [editInfo, setEditInfo] = useState({
-    eidtName: "",
+    editName: "",
     editPhone: "",
   });
 
   const navigate = useNavigate();
 
   const onEditButtonAction = () => {
-    console.log({ name, phone });
     mutate({
-      name: editInfo.eidtName,
+      name: editInfo.editName,
       phone: editInfo.editPhone,
     });
   };
@@ -26,7 +25,7 @@ function EditInfoList({ id, name, insitution, email, phone }) {
   const onCancelEditInfo = () => {
     navigate("/info");
   };
-
+  console.log(editInfo);
   const { mutate } = useMutation(
     async (param) =>
       await axios({
@@ -36,15 +35,20 @@ function EditInfoList({ id, name, insitution, email, phone }) {
         },
         method: "put",
         data: param,
-      })
+      }),
+    {
+      onSuccess: () => {
+        navigate("/menu");
+      },
+    }
   );
 
   return (
     <div className={styles.wrapper}>
       <UserContent category="교육기관" information={insitution} />
-      <UserEditContent category="이름" information={name} value={editInfo.eidtName} setEditInfo={(value) => setEditInfo((prev) => ({ ...prev, name: value }))} />
+      <UserEditContent category="이름" information={name} value={editInfo.editName} setEditInfo={(value) => setEditInfo((prev) => ({ ...prev, editName: value }))} />
       <UserContent category="이메일" information={email} />
-      <UserEditContent category="전화번호" information={phone} value={editInfo.editPhone} setEditInfo={(value) => setEditInfo((prev) => ({ ...prev, phone: value }))} />
+      <UserEditContent category="전화번호" information={phone} value={editInfo.editPhone} setEditInfo={(value) => setEditInfo((prev) => ({ ...prev, editPhone: value }))} />
       <div className={styles.align}>
         <button onClick={onCancelEditInfo} className={styles.cancelButton}>
           취소

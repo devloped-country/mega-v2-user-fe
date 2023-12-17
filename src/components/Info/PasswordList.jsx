@@ -31,12 +31,9 @@ function PasswordList({ onAction }) {
       }),
     {
       onSuccess: (data) => {
-        //        if(data.existedPassword == password) {
-        //          mutate({
-        //            editpassword:passwordInfo.editpassword
-        //          })
-        //        }
-        navigate("/info");
+        if (data.data.responseCode == 1) {
+          navigate("/info");
+        }
       },
       onError: () => {
         setIsShowingPWError(true);
