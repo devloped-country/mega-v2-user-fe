@@ -22,7 +22,7 @@ function PasswordList({ onAction }) {
   const { mutate } = useMutation(
     async (param) =>
       await axios({
-        url: "/api/user/updatePassword",
+        url: "https://user.mzc-appmega.click/api/user/updatePassword",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

@@ -10,7 +10,7 @@ function NoticeContent() {
     [],
     async () =>
       await axios({
-        url: "/api/notice/notices",
+        url: "https://user.mzc-appmega.click/api/notice/notices",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

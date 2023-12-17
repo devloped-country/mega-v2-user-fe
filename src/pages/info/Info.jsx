@@ -12,7 +12,7 @@ function Info() {
     [],
     async () =>
       await axios({
-        url: `/api/user/read`,
+        url: `https://user.mzc-appmega.click/api/user/read`,
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
