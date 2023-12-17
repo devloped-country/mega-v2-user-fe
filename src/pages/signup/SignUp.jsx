@@ -1,9 +1,9 @@
-import { useNavigate } from 'react-router-dom';
-import styles from './SignUp.module.css';
-import { useEffect, useReducer, useState } from 'react';
-import { initialSignupState, signupReducer } from '@/reducer/singupReducer';
-import axios from 'axios';
-import { useMutation } from '@/hooks/useMutation';
+import { useNavigate } from "react-router-dom";
+import styles from "./SignUp.module.css";
+import { useEffect, useReducer, useState } from "react";
+import { initialSignupState, signupReducer } from "@/reducer/singupReducer";
+import axios from "axios";
+import { useMutation } from "@/hooks/useMutation";
 
 function SignUp() {
   const [signupState, dispatch] = useReducer(signupReducer, initialSignupState);
@@ -16,8 +16,8 @@ function SignUp() {
   const { mutate } = useMutation(
     async (param) =>
       await axios({
-        url: '/api/auth/identify/check',
-        method: 'post',
+        url: "/api/auth/identify/check",
+        method: "post",
         data: param,
       }),
     {
@@ -37,8 +37,8 @@ function SignUp() {
   const { mutate: authMutate } = useMutation(
     async (param) =>
       await axios({
-        url: '/api/auth/identify/certificate',
-        method: 'post',
+        url: "/api/auth/identify/certificate",
+        method: "post",
         data: param,
       }),
     {
@@ -87,116 +87,69 @@ function SignUp() {
   };
 
   const onNext = () => {
-    navigate('/signup/password', { state: { id: userId } });
+    navigate("/signup/password", { state: { id: userId } });
   };
 
   return (
     <section className={styles.wrapper}>
       <h2 className={styles.title}>회원님의 정보를 입력해주세요.</h2>
-      <input
-        type='text'
-        placeholder='이름'
-        className={styles.input}
-        value={signupState.name}
-        onChange={({ target }) =>
-          dispatch({ type: 'INPUT', payload: 'name', value: target.value })
-        }
-      />
-      <input
-        type='text'
-        placeholder='휴대폰 번호'
-        className={styles.input}
-        value={signupState.phone}
-        onChange={({ target }) =>
-          dispatch({ type: 'INPUT', payload: 'phone', value: target.value })
-        }
-      />
-      <input
-        type='text'
-        placeholder='이메일'
-        className={styles.input}
-        value={signupState.email}
-        onChange={({ target }) =>
-          dispatch({ type: 'INPUT', payload: 'email', value: target.value })
-        }
-      />
+      <input type="text" placeholder="이름" className={styles.input} value={signupState.name} onChange={({ target }) => dispatch({ type: "INPUT", payload: "name", value: target.value })} />
+      <input type="text" placeholder="휴대폰 번호" className={styles.input} value={signupState.phone} onChange={({ target }) => dispatch({ type: "INPUT", payload: "phone", value: target.value })} />
+      <input type="text" placeholder="이메일" className={styles.input} value={signupState.email} onChange={({ target }) => dispatch({ type: "INPUT", payload: "email", value: target.value })} />
       <div className={styles.inputWrapperContainer}>
         <div className={styles.inputWrapperWrapper}>
           <div className={styles.inputWrapper}>
             <input
-              type='radio'
-              value='phone'
-              id='phoneNumber'
+              type="radio"
+              value="phone"
+              id="phoneNumber"
               className={styles.radio}
-              name='auth'
-              checked={signupState.check === 'phone'}
+              name="auth"
+              checked={signupState.check === "phone"}
               onChange={({ target }) =>
                 dispatch({
-                  type: 'INPUT',
-                  payload: 'check',
+                  type: "INPUT",
+                  payload: "check",
                   value: target.value,
                 })
               }
             />
-            <label htmlFor='phoneNumber' className={styles.label}>
+            <label htmlFor="phoneNumber" className={styles.label}>
               전화번호 인증
             </label>
           </div>
           <div className={styles.inputWrapper}>
             <input
-              type='radio'
-              value='email'
-              id='email'
+              type="radio"
+              value="email"
+              id="email"
               className={styles.radio}
-              name='auth'
-              checked={signupState.check === 'email'}
+              name="auth"
+              checked={signupState.check === "email"}
               onChange={({ target }) =>
                 dispatch({
-                  type: 'INPUT',
-                  payload: 'check',
+                  type: "INPUT",
+                  payload: "check",
                   value: target.value,
                 })
               }
             />
-            <label htmlFor='email' className={styles.label}>
+            <label htmlFor="email" className={styles.label}>
               이메일 인증
             </label>
           </div>
         </div>
-        <button
-          type='button'
-          className={styles.submit}
-          disabled={isSubmitButtonActive}
-          onClick={onClickAuthNumberSend}
-        >
+        <button type="button" className={styles.submit} disabled={isSubmitButtonActive} onClick={onClickAuthNumberSend}>
           전송
         </button>
       </div>
       <div className={styles.authWrapper}>
-        <input
-          type='text'
-          placeholder='인증번호'
-          className={styles.authInput}
-          value={signupState.auth}
-          onChange={({ target }) =>
-            dispatch({ type: 'INPUT', payload: 'auth', value: target.value })
-          }
-        />
-        <button
-          type='button'
-          className={styles.auth}
-          onClick={onClickAuthNumber}
-          disabled={isAuthButtonActive}
-        >
+        <input type="text" placeholder="인증번호" className={styles.authInput} value={signupState.auth} onChange={({ target }) => dispatch({ type: "INPUT", payload: "auth", value: target.value })} />
+        <button type="button" className={styles.auth} onClick={onClickAuthNumber} disabled={isAuthButtonActive}>
           인증
         </button>
       </div>
-      <button
-        type='button'
-        className={styles.button}
-        onClick={onNext}
-        disabled={isAuth}
-      >
+      <button type="button" className={styles.button} onClick={onNext} disabled={isAuth}>
         확인
       </button>
     </section>

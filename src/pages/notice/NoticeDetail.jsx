@@ -1,7 +1,7 @@
-import styles from './NoticeDetail.module.css';
-import { useParams } from 'react-router-dom';
-import { useFetch } from '@/hooks/useFetch';
-import axios from 'axios';
+import styles from "./NoticeDetail.module.css";
+import { useParams } from "react-router-dom";
+import { useFetch } from "@/hooks/useFetch";
+import axios from "axios";
 
 function NoticeDetail() {
   const { id } = useParams();
@@ -11,7 +11,7 @@ function NoticeDetail() {
       await axios({
         url: `/api/notice/${id}`,
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       })
   );
@@ -31,9 +31,7 @@ function NoticeDetail() {
       <div className={styles.createdInfo}>
         <p className={styles.author}>{notice.data.data.author}</p>
         <p className={styles.createdTime}>
-          {`${new Date(notice.data.data.createdTime).getFullYear()} ${
-            new Date(notice.data.data.createdTime).getMonth() + 1
-          }-${new Date(notice.data.data.createdTime).getDate()}`}
+          {`${new Date(notice.data.data.createdTime).getFullYear()} ${new Date(notice.data.data.createdTime).getMonth() + 1}-${new Date(notice.data.data.createdTime).getDate()}`}
         </p>
       </div>
       <div className={styles.noticeInfo}>
