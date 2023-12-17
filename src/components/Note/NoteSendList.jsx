@@ -60,7 +60,7 @@ function NoteSendList() {
     <section className={styles.wrapper}>
       <ul className={styles.noteList}>
         {data.data.map(({ id, title, content, time }) => {
-          return <NoteItem key={id} title={title} desc={content} date={time} isRead={true} onClick={() => handleClickList(id)} />;
+          return <NoteItem key={id} title={note.from} desc={note.title} date={note.time} isRead={true} onClick={() => handleClickList(note.id)} />;
         })}
       </ul>
       {isShowingModal && <NoteModal handleClose={handleClose} id={id} />}

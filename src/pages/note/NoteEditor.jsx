@@ -17,7 +17,7 @@ function NoteEditor() {
   const { mutate } = useMutation(
     async () =>
       await axios({
-        url: "https://user.mzc-appmega.click/api/note/register",
+        url: "http://localhost:8082/api/note/register",
         method: "post",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -30,6 +30,7 @@ function NoteEditor() {
       }),
     {
       onSuccess: async (data) => {
+        console.log(data);
         await doSend({
           action: "sendToManager",
           type: "note",
@@ -37,8 +38,8 @@ function NoteEditor() {
           to: [location.state.receiverId],
           title: title,
           content: content,
-          noteSendId: data.noteSendId,
-          senderName: data.myName,
+          noteSendId: data.data.noteSendId,
+          senderName: data.data.myName,
         });
         navigate("/note");
       },
