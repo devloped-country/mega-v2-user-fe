@@ -1,10 +1,15 @@
 .wrapper {
   border-radius: 10px;
   flex-grow: 1;
+  height: 100%;
 }
 
 .button {
   position: absolute;
   right: 24px;
   bottom: 24px;
+}
+
+.notMessage {
+  padding: 24px;
 }
