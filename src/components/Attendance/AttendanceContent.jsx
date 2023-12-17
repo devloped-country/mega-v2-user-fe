@@ -19,14 +19,13 @@ function AttendanceContent() {
   if (isLoading) {
     return <ContentLoading />;
   }
-  console.log(
-    data.data.attendanceResponse.sort(
-      (a, b) => new Date(a.startTime) - new Date(b.startTime)
-    )
+
+  const sortedAttendance = data.data.attendanceResponse.sort(
+    (a, b) => new Date(a.startTime) - new Date(b.startTime)
   );
   return (
     <>
-      <AttendanceCalendar />
+      <AttendanceCalendar sortedAttendance={sortedAttendance} />
       <AttendanceInfo attendanceInfo={data.data.attendanceSum} />
     </>
   );
