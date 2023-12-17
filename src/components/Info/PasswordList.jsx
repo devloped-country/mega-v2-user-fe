@@ -22,7 +22,7 @@ function PasswordList({ onAction }) {
   const { mutate } = useMutation(
     async (param) =>
       await axios({
-        url: "/api/user/updatePassword",
+        url: "https://user.mzc-appmega.click/api/user/updatePassword",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -31,12 +31,9 @@ function PasswordList({ onAction }) {
       }),
     {
       onSuccess: (data) => {
-        //        if(data.existedPassword == password) {
-        //          mutate({
-        //            editpassword:passwordInfo.editpassword
-        //          })
-        //        }
-        navigate("/info");
+        if (data.data.responseCode == 1) {
+          navigate("/info");
+        }
       },
       onError: () => {
         setIsShowingPWError(true);

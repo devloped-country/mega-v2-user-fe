@@ -1,70 +1,88 @@
 import React, { useState, useEffect } from "react";
 import NoteItem from "./NoteItem";
-import NoteModal from "./NoteModal";
 import styles from "./NoteList.module.css";
 import { useFetch } from "@/hooks/useFetch";
+import { useMutation } from "@/hooks/useMutation";
 import axios from "axios";
+import { useNewSocket } from "@/hooks/useNewSocket";
+import ContentLoading from "@components/common/ContentLoading";
 
 function NoteSendList() {
-  const [isShowingModal, setIsShowingModal] = useState(false);
-  const [selectedIds, setSelectedIds] = useState([]);
+  const { receivedNotes } = useNewSocket();
+  const [messages, setMessages] = useState([]);
 
-  const { data, isLoading } = useFetch(
+  const { isLoading, refetch } = useFetch(
     [],
     async () =>
       await axios({
-        url: "/api/note/sent",
+        url: "https://user.mzc-appmega.click/api/note/sent",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
-      })
+      }),
+    {
+      onSuccess: ({ data }) => {
+        const mapedData = data.map((data) => ({ ...data, isSelect: false }));
+        setMessages(mapedData);
+      },
+    }
   );
 
-  if (isLoading) {
-    return;
-  }
-
-  if (!data || data.length === 0) {
-    return <div>No sent notes.</div>;
-  }
-
-  const handleClickList = (id) => {
-    setIsShowingModal(true);
-    setId(id);
-    setSelectedIds((prevSelectedIds) => [...prevSelectedIds, id]);
-  };
-
-  const handleClose = () => {
-    setIsShowingModal(false);
-  };
-
-  const handleDeleteSelected = async () => {
-    try {
-      // API로 선택한 노트의 ID 배열 전송
+  const { mutate } = useMutation(
+    async (params) =>
       await axios({
-        url: "/api/note/real_delete_sent",
+        url: "https://user.mzc-appmega.click/api/note/real_delete_sent",
         method: "put",
-        data: { ids: selectedIds },
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
-      });
-
-      // 여기서 선택 상태 초기화나 다른 필요한 작업 수행
-    } catch (error) {
-      console.error("Error deleting notes:", error);
+        data: params,
+      }),
+    {
+      onSuccess: () => {
+        refetch();
+      },
     }
+  );
+
+  useEffect(() => {
+    const mapedReceiveNotes = receivedNotes.map((receivedNote) => ({ isSelected: false, note: receivedNote, ...receivedNote }));
+    setMessages(mapedReceiveNotes);
+  }, [receivedNotes]);
+
+  if (isLoading) {
+    return <ContentLoading />;
+  }
+
+  const onChange = (id) => {
+    setMessages((prev) => {
+      return prev.map((message) => {
+        if (id === message.id) {
+          return { ...message, isSelect: !message.isSelect };
+        }
+
+        return message;
+      });
+    });
+  };
+
+  const onDelete = () => {
+    const filterdMessages = messages.filter((message) => message.isSelect).map((message) => message.id);
+    mutate({ selectedNoteId: filterdMessages });
   };
 
   return (
     <section className={styles.wrapper}>
       <ul className={styles.noteList}>
-        {data.data.map(({ id, title, content, time }) => {
-          return <NoteItem key={id} title={note.from} desc={note.title} date={note.time} isRead={true} onClick={() => handleClickList(note.id)} />;
-        })}
+        {messages ? (
+          messages.map(({ id, title, from, content, time, isRead, isSelect }) => {
+            return <NoteItem key={id} id={id} title={title} desc={content} date={time} isRead={true} isSelect={isSelect} onChange={onChange} />;
+          })
+        ) : (
+          <div className={styles.notMessage}>쪽지가 없습니다.</div>
+        )}
       </ul>
-      {isShowingModal && <NoteModal handleClose={handleClose} id={id} />}
-      <img src={`${import.meta.env.VITE_CLOUD_FRONT_ID}/Frame 565.svg`} alt="메일 삭제" className={styles.button} />
+      <img src={`https://d2f3kqq80r3o3g.cloudfront.net/Frame 565.svg`} alt="메일 삭제" className={styles.button} onClick={onDelete} />
     </section>
   );
 }

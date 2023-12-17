@@ -3,6 +3,7 @@ import styles from "./NoteContent.module.css";
 import { useState } from "react";
 import { useFetch } from "@/hooks/useFetch";
 import axios from "axios";
+import ContentLoading from "@/components/common/ContentLoading";
 
 function NoteContent() {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ function NoteContent() {
     [],
     async () =>
       await axios({
-        url: "/api/note/receivers",
+        url: "https://user.mzc-appmega.click/api/note/receivers",
         method: "get",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -21,8 +22,9 @@ function NoteContent() {
   );
 
   if (isLoading) {
-    return;
+    return <ContentLoading />;
   }
+
   console.log("불러온정보" + data);
 
   //id,name,email
