@@ -12,24 +12,24 @@ function QR() {
 
   const handleResult = async (result) => {
     if (result) {
-      const [_, qr] = result.split("/");
-      const { data } = await axios({
-        url: "https://user.mzc-appmega.click/api/user",
-        method: "post",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-        data: {
-          email: localStorage.getItem("email"),
-          latitude: location.latitude,
-          longitude: location.longitude,
-        },
-      });
+      const [_, qr] = result.split('/');
+      // const { data } = await axios({
+      //   url: '/api/user',
+      //   method: 'post',
+      //   headers: {
+      //     Authorization: `Bearer ${localStorage.getItem('token')}`,
+      //   },
+      //   data: {
+      //     email: localStorage.getItem('email'),
+      //     latitude: location.latitude,
+      //     longitude: location.longitude,
+      //   },
+      // });
 
-      if (data) {
-        navigate("/qr/location");
-        return;
-      }
+      // if (data) {
+      //   navigate('/qr/location');
+      //   return;
+      // }
 
       const res = await axios({
         url: `https://user.mzc-appmega.click/api/qr/${qr}/${localStorage.getItem("courseId")}`,
