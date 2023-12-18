@@ -1,9 +1,9 @@
-import QrReader from 'react-qr-reader-es6';
-import styles from './QR.module.css';
-import { useSQS } from '@/hooks/useSQS';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { useGeoLocation } from '@/hooks/useGeoLocation';
+import QrReader from "react-qr-reader-es6";
+import styles from "./QR.module.css";
+import { useSQS } from "@/hooks/useSQS";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useGeoLocation } from "@/hooks/useGeoLocation";
 
 function QR() {
   const { mutater: sqsMutate } = useSQS();
@@ -32,34 +32,29 @@ function QR() {
       }
 
       const res = await axios({
-        url: `/api/qr/${qr}/${localStorage.getItem('courseId')}`,
+        url: `https://user.mzc-appmega.click/api/qr/${qr}/${localStorage.getItem("courseId")}`,
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
 
       if (res.data.responseCode === -1) {
-        navigate('/qr/auth');
+        navigate("/qr/auth");
         return;
       }
 
       try {
-        await sqsMutate(qr, localStorage.getItem('email'));
-        navigate('/qr/success');
+        await sqsMutate(qr, localStorage.getItem("email"));
+        navigate("/qr/success");
       } catch (e) {
-        navigate('/qr/auth');
+        navigate("/qr/auth");
       }
     }
   };
 
   return (
     <section className={styles.qrWrapper}>
-      <QrReader
-        delay={1000}
-        onScan={handleResult}
-        className={styles.qr}
-        style={{ width: '100%', height: '100%' }}
-      />
+      <QrReader delay={1000} onScan={handleResult} className={styles.qr} style={{ width: "100%", height: "100%" }} />
       <div className={styles.wrapper}>
         <div className={styles.header} />
         <div className={styles.left} />
