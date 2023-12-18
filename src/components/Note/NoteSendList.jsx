@@ -1,64 +1,88 @@
-import React, { useState, useEffect } from 'react';
-import NoteItem from './NoteItem';
-import NoteModal from './NoteModal';
-import styles from './NoteList.module.css';
-import { useFetch } from '@/hooks/useFetch';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import NoteItem from "./NoteItem";
+import styles from "./NoteList.module.css";
+import { useFetch } from "@/hooks/useFetch";
+import { useMutation } from "@/hooks/useMutation";
+import axios from "axios";
+import { useNewSocket } from "@/hooks/useNewSocket";
+import ContentLoading from "@components/common/ContentLoading";
 
 function NoteSendList() {
-  const [isShowingModal, setIsShowingModal] = useState(false);
-  // const [id, setId] = useState("");
+  const { receivedNotes } = useNewSocket();
+  const [messages, setMessages] = useState([]);
 
-  const { data, isLoading } = useFetch(
+  const { isLoading, refetch } = useFetch(
     [],
     async () =>
       await axios({
-        url: '/api/note/sent',
+        url: "https://user.mzc-appmega.click/api/note/sent",
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
-      })
+      }),
+    {
+      onSuccess: ({ data }) => {
+        const mapedData = data.map((data) => ({ ...data, isSelect: false }));
+        setMessages(mapedData);
+      },
+    }
   );
 
+  const { mutate } = useMutation(
+    async (params) =>
+      await axios({
+        url: "https://user.mzc-appmega.click/api/note/real_delete_sent",
+        method: "put",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        data: params,
+      }),
+    {
+      onSuccess: () => {
+        refetch();
+      },
+    }
+  );
+
+  useEffect(() => {
+    const mapedReceiveNotes = receivedNotes.map((receivedNote) => ({ isSelected: false, note: receivedNote, ...receivedNote }));
+    setMessages(mapedReceiveNotes);
+  }, [receivedNotes]);
+
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <ContentLoading />;
   }
 
-  if (!data || data.length === 0) {
-    return <div>No sent notes.</div>;
-  }
+  const onChange = (id) => {
+    setMessages((prev) => {
+      return prev.map((message) => {
+        if (id === message.id) {
+          return { ...message, isSelect: !message.isSelect };
+        }
 
-  const handleClickList = (id) => {
-    setIsShowingModal(true);
-    setId(id);
+        return message;
+      });
+    });
   };
 
-  const handleClose = () => {
-    setIsShowingModal(false);
+  const onDelete = () => {
+    const filterdMessages = messages.filter((message) => message.isSelect).map((message) => message.id);
+    mutate({ selectedNoteId: filterdMessages });
   };
 
   return (
     <section className={styles.wrapper}>
       <ul className={styles.noteList}>
-        {data.data.map(({ id, title, content, time }) => {
-          return (
-            <NoteItem
-              key={id}
-              title={title}
-              desc={content}
-              date={time}
-              isRead={true}
-              onClick={() => handleClickList(id)}
-            />
-          );
-        })}
+        {messages ? (
+          messages.map(({ id, title, from, content, time, isRead, isSelect }) => {
+            return <NoteItem key={id} id={id} title={title} desc={content} date={time} isRead={true} isSelect={isSelect} onChange={onChange} />;
+          })
+        ) : (
+          <div className={styles.notMessage}>쪽지가 없습니다.</div>
+        )}
       </ul>
-      {isShowingModal && <NoteModal handleClose={handleClose} id={id} />}
-      <img
-        src={`${import.meta.env.VITE_CLOUD_FRONT_ID}/Frame 565.svg`}
-        alt='메일 삭제'
-        className={styles.button}
-      />
+      <img src={`https://d2f3kqq80r3o3g.cloudfront.net/Frame 565.svg`} alt="메일 삭제" className={styles.button} onClick={onDelete} />
     </section>
   );
 }

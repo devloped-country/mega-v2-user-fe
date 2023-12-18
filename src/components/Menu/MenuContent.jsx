@@ -1,24 +1,24 @@
-import { useNavigate } from 'react-router-dom';
-import MenuHeader from './MenuHeader';
-import MenuList from './MenuList';
-import { useFetch } from '@/hooks/useFetch';
-import axios from 'axios';
-import ContentLoading from '../common/ContentLoading';
+import { useNavigate } from "react-router-dom";
+import MenuHeader from "./MenuHeader";
+import MenuList from "./MenuList";
+import { useFetch } from "@/hooks/useFetch";
+import axios from "axios";
+import ContentLoading from "../common/ContentLoading";
 
 function MenuContent() {
   const navigate = useNavigate();
 
   const handleUserInfo = () => {
-    navigate('/info');
+    navigate("/info");
   };
 
   const { data: userInfo, isLoading } = useFetch(
     [],
     async () =>
       await axios({
-        url: `/api/user/read`,
+        url: `https://user.mzc-appmega.click/api/user/read`,
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       })
   );

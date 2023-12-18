@@ -1,17 +1,17 @@
-import axios from 'axios';
-import AttendanceCalendar from './AttendanceCalendar';
-import AttendanceInfo from './AttendanceInfo';
-import { useFetch } from '@/hooks/useFetch';
-import ContentLoading from '@/components/common/ContentLoading';
+import axios from "axios";
+import AttendanceCalendar from "./AttendanceCalendar";
+import AttendanceInfo from "./AttendanceInfo";
+import { useFetch } from "@/hooks/useFetch";
+import ContentLoading from "@/components/common/ContentLoading";
 
 function AttendanceContent() {
   const { data, isLoading } = useFetch(
     [],
     async () =>
       await axios({
-        url: '/api/attendance/AttendancetTotal',
+        url: "https://user.mzc-appmega.click/api/attendance/AttendancetTotal",
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       })
   );
@@ -20,9 +20,7 @@ function AttendanceContent() {
     return <ContentLoading />;
   }
 
-  const sortedAttendance = data.data.attendanceResponse.sort(
-    (a, b) => new Date(a.startTime) - new Date(b.startTime)
-  );
+  const sortedAttendance = data.data.attendanceResponse.sort((a, b) => new Date(a.startTime) - new Date(b.startTime));
   return (
     <>
       <AttendanceCalendar sortedAttendance={sortedAttendance} />
